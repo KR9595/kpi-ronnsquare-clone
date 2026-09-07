@@ -1,0 +1,29 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-sans: 'Space Grotesk', system-ui, sans-serif;
+  --font-serif: 'Fraunces', Georgia, serif;
+
+  --color-cream: #ffead4;
+  --color-ink: #231800;
+  --color-lilac: #dbb6fc;
+  --color-black: #000000;
+
+  --breakpoint-xs: 30rem;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-cream);
+  color: var(--color-ink);
+  font-family: var(--font-serif);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background-color: var(--color-lilac);
+  color: var(--color-ink);
+}
