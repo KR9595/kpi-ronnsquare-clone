@@ -13,18 +13,22 @@ function App() {
   return (
     <>
       <Header />
-      {/* The header is fixed, so content starts below it. */}
-      <main id="main-content" className="relative w-full pt-(--header-height)">
-        <Hero />
-        <RunningLine />
-        <Quote />
-        <Preoccupations />
-        <Advantages />
-        <Theses />
-        <Services />
-        <Projects />
-        {/* Further sections are added incrementally, one at a time. */}
-      </main>
+      {/* The source's `[data-barba=wrapper]`: clips shapes that hang off screen (e.g. the
+          mobile Advantages totem) so the page never scrolls sideways. */}
+      <div className="relative z-1 overflow-clip">
+        {/* The header is fixed, so content starts below it. */}
+        <main id="main-content" className="relative w-full pt-(--header-height)">
+          <Hero />
+          <RunningLine />
+          <Quote />
+          <Preoccupations />
+          <Advantages />
+          <Theses />
+          <Services />
+          <Projects />
+          {/* Further sections are added incrementally, one at a time. */}
+        </main>
+      </div>
       {/* After the content, so the blocks have registered their entrance timelines. */}
       <HomeEntrance />
     </>
