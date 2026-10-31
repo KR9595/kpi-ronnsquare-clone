@@ -244,6 +244,20 @@ html.lenis body {
     --btn-border: transparent;
   }
 
+  .btn--parme {
+    --btn-bg: var(--color-lilac);
+    --btn-label: var(--color-ink);
+    --btn-bg-hover: var(--color-ink);
+    --btn-label-hover: var(--color-cream);
+    --btn-border: transparent;
+  }
+
+  .btn--sm {
+    --btn-height: 1.5625rem;
+    --btn-font-size: 1rem; /* --font-size-btn-sm */
+    --btn-pad-x: 0.9375rem; /* --space-figma-15 */
+  }
+
   .btn--lg {
     --btn-height: 3.75rem;
     --btn-font-size: 1.5rem;

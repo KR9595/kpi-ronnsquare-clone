@@ -56,6 +56,10 @@ public/
       timeline at 1440×900, 1024×768 and 375×812)
 - [x] "Our Latest Projects" running line (draggable endless ticker with inertia snapping,
       prev/next arrows, hover pause, entrance; checked at 1440×900, 1024×768 and 375×812)
+- [x] Signature quote (pinned, scrubbed character reveal and totem fly-in)
+- [x] "Your Challenges" preoccupations (shape cards, entrance) with the quote's `land` exit:
+      the totem shapes fall onto the cards (Matter.js), plus the desktop triangle wipe; checked
+      at 1440×900, 1024×768 and 375×812
 - [ ] Remaining homepage sections
 - [ ] Footer
 
@@ -82,9 +86,16 @@ public/
   block-1-3-quote-anim.js: a pinned (`end: '+=100%'`), scroll-scrubbed timeline brightens the
   split characters and flies the totem's shapes in along the source's Lottie-baked keyframes
   (`src/lib/mainQuoteReveal.ts`, from its main-quote-reveal.js). Scrubs follow the scroll
-  directly from 1024px up and lag 0.3s below (`src/lib/scrub.ts`; `?scrub=0.5` overrides). The
-  block's `data-quote-exit="land"` exit (shapes dropping onto the next block's cards) comes
-  with the Preoccupations block it targets.
+  directly from 1024px up and lag 0.3s below (`src/lib/scrub.ts`; `?scrub=0.5` overrides).
+- The quote's `data-quote-exit="land"` exit (`src/lib/quoteExitLand.ts`, from the source's
+  quote-exit-land.js, loaded lazily when the quote pin is passed) drops the totem shapes onto
+  the Preoccupations cards: a seeded Matter.js simulation (matter-js pinned 0.20.0, as bundled
+  by the source) is baked once and scrubbed by the scroll, so the fall is the same on every
+  run for a given viewport; `?fallSeed=<n>` changes the seed. From 1024px up the triangle
+  card's own shape then pins and scales into a full-screen wipe until the block after
+  Preoccupations (Advantages, still to build) scrolls over it — the wipe only starts once a
+  `[data-block]` follows Preoccupations. CustomEase/CustomWiggle are registered in that lazy
+  module, as on the source.
 - Homepage intro: a port of the source's entrance (`src/lib/intro/`, mirroring its
   `entrances/home.js`, `brand-clone.js`, `wordmark-reveal.js` and `preloader-data.js`; markup
   in `src/components/intro/` plus the static `#site-loader` and session gate in `index.html`).

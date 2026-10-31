@@ -1,0 +1,226 @@
+/*
+ * "Your Challenges", ported from the source site's `.block-1-4-preoccupations` block (same
+ * class names and breakpoints). Only the rules the homepage's `--shapes` variant uses are
+ * ported (no badges or images). Source tokens are resolved inline and named in comments.
+ */
+
+/* The next block, while the triangle wipe is pinned under it (quote exit `land`). */
+.is-above-wipe {
+  position: relative;
+  z-index: 2;
+}
+
+.block-1-4-preoccupations {
+  position: relative;
+  z-index: 1;
+  background-color: #ffead4; /* --color-brand-sable */
+  padding: 2.5rem 0.625rem; /* --space-figma-40, --space-figma-10 */
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem; /* --space-figma-40 */
+}
+
+@media (min-width: 48em) {
+  .block-1-4-preoccupations {
+    padding: 5rem 2.5rem; /* --space-figma-80, --space-figma-40 */
+  }
+}
+
+@media (min-width: 75em) {
+  .block-1-4-preoccupations {
+    /* --space-figma-200-fluid, --space-figma-60-fluid */
+    padding: clamp(7.5rem, 10.417vw, 12.5rem) clamp(2.25rem, 3.125vw, 3.75rem);
+    gap: clamp(1.5rem, 2.083vw, 2.5rem); /* --space-figma-40-fluid */
+  }
+}
+
+.block-1-4-preoccupations__title {
+  font-family: var(--font-primary);
+  font-size: 1.75rem; /* --font-size-h2-mobile */
+  font-weight: 700; /* Synthesised from N27 Regular, as on the source. */
+  line-height: 1.1;
+  letter-spacing: -0.0625rem; /* --letter-spacing-tight */
+  color: #231800; /* --color-headline-maron */
+  text-transform: uppercase;
+}
+
+@media (min-width: 75em) {
+  .block-1-4-preoccupations__title {
+    font-size: clamp(4.5rem, 6.25vw, 7.5rem);
+    line-height: 1.05;
+  }
+}
+
+.block-1-4-preoccupations__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem; /* --space-figma-20 */
+}
+
+@media (min-width: 75em) {
+  .block-1-4-preoccupations__grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(0.75rem, 1.042vw, 1.25rem); /* --space-figma-20-fluid */
+  }
+}
+
+.block-1-4-preoccupations__spacer {
+  display: none;
+}
+
+@media (min-width: 75em) {
+  .block-1-4-preoccupations__spacer {
+    display: block;
+  }
+}
+
+.block-1-4-preoccupations__card {
+  background-color: #231800; /* --color-bg-dark */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.block-1-4-preoccupations__card-top {
+  position: relative;
+  height: 15.75rem;
+}
+
+@media (min-width: 75em) {
+  .block-1-4-preoccupations__card-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: clamp(0.75rem, 1.042vw, 1.25rem); /* --space-figma-20-fluid */
+    height: clamp(11.5125rem, 15.9895833333vw, 19.1875rem);
+  }
+}
+
+.block-1-4-preoccupations__card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem; /* --space-figma-20 */
+  padding: 0.625rem; /* --space-figma-10 */
+  flex: 1;
+}
+
+@media (min-width: 75em) {
+  .block-1-4-preoccupations__card-body {
+    padding: clamp(0.75rem, 1.042vw, 1.25rem); /* --space-figma-20-fluid */
+    gap: clamp(0.75rem, 1.042vw, 1.25rem); /* --space-figma-20-fluid */
+  }
+}
+
+.block-1-4-preoccupations__card-bottom {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem; /* --space-figma-10 */
+}
+
+@media (min-width: 75em) {
+  .block-1-4-preoccupations__card-bottom {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: clamp(0.75rem, 1.042vw, 1.25rem); /* --space-figma-20-fluid */
+    margin-top: auto;
+  }
+}
+
+.block-1-4-preoccupations__card-title {
+  font-family: var(--font-primary);
+  font-size: 2rem; /* --font-size-h5 */
+  font-weight: 700; /* --font-weight-bold */
+  line-height: 1.2; /* --line-height-snug */
+  letter-spacing: -0.035rem; /* --letter-spacing-tight-sm */
+  text-transform: uppercase;
+  color: #ffead4; /* --color-headline-sable */
+}
+
+@media (min-width: 90em) {
+  .block-1-4-preoccupations__card-title {
+    max-width: 23.75rem;
+  }
+}
+
+.block-1-4-preoccupations__card-title-link {
+  color: inherit;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.block-1-4-preoccupations__card-title-link:hover {
+  opacity: 0.7;
+}
+
+.block-1-4-preoccupations__card-desc {
+  font-family: var(--font-secondary);
+  font-size: 0.875rem;
+  line-height: 1.4; /* --line-height-relaxed */
+  color: #ffead4cc; /* --color-text-sable */
+}
+
+@media (min-width: 75em) {
+  .block-1-4-preoccupations__card-desc {
+    font-size: 0.875rem; /* --font-size-sm */
+  }
+}
+
+@media (min-width: 90em) {
+  .block-1-4-preoccupations__card-desc {
+    max-width: 23.75rem;
+  }
+}
+
+.block-1-4-preoccupations__card-cta {
+  flex-shrink: 0;
+}
+
+@media (min-width: 75em) {
+  .block-1-4-preoccupations__card-cta {
+    align-self: flex-end;
+  }
+}
+
+.block-1-4-preoccupations__card-shape {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  color: #dbb6fc; /* --color-brand-parme */
+}
+
+.block-1-4-preoccupations__card-shape .equilibre-shape {
+  width: 5rem;
+  display: block;
+}
+
+@media (min-width: 75em) {
+  .block-1-4-preoccupations__card-shape .equilibre-shape {
+    width: clamp(4.5rem, 6.25vw, 7.5rem);
+  }
+}
+
+.block-1-4-preoccupations--shapes .block-1-4-preoccupations__card-top {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* The quote's totem shapes land on these; only the triangle shows, as the wipe's stand-in. */
+.block-1-4-preoccupations--shapes .block-1-4-preoccupations__card-shape {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.block-1-4-preoccupations--shapes .block-1-4-preoccupations__card.is-wiping {
+  overflow: visible;
+}
+
+.block-1-4-preoccupations--shapes
+  .block-1-4-preoccupations__card.is-wiping
+  .block-1-4-preoccupations__card-top {
+  position: relative;
+  z-index: 1;
+}

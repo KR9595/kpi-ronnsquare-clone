@@ -7,16 +7,22 @@ import { gsap, useGSAP } from '@/lib/gsap'
 import { buildMainQuoteTimeline } from '@/lib/mainQuoteReveal'
 import { getScrub } from '@/lib/scrub'
 
+import EquilibreShape, { type EquilibreShapeName } from '@/components/ui/EquilibreShape'
+
 import './quote.css'
 
 const QUOTE =
   'Our signature: Shaping spaces. Commitment is at the heart of how we work. A strong belief and a total dedication to supporting businesses and the people who use their spaces.'
 
+/** The totem's shapes, top to bottom (the `land` exit relies on this order). */
+const TOTEM_SHAPES: EquilibreShapeName[] = ['square', 'diamond', 'circle', 'triangle']
+
 /** Lazy exit animations the block runs once, when the pin is scrolled past (`data-quote-exit`). */
 type QuoteExit = (shapes: HTMLElement[], totem: HTMLElement, block: HTMLElement) => void
-// The homepage's `land` exit drops the shapes onto the next block's cards; it is added with
-// the Preoccupations block (block-1-4), which it targets.
-const QUOTE_EXITS: Record<string, () => Promise<QuoteExit>> = {}
+const QUOTE_EXITS: Record<string, () => Promise<QuoteExit>> = {
+  // Drops the shapes onto the next block's (Preoccupations) cards, with Matter.js physics.
+  land: () => import('@/lib/quoteExitLand').then((module) => module.initQuoteExitLand),
+}
 
 /**
  * Signature quote (`block-1-3-quote--fly-in`), ported from the source's
@@ -78,7 +84,9 @@ function Quote() {
               const loadExit = QUOTE_EXITS[exitName]
               if (!loadExit) return
               hasExited = true
-              void loadExit().then((exit) => exit(shapes, totem, section))
+              // Run inside the GSAP context, so the exit's tweens and triggers revert with it.
+              const runExit = contextSafe!((exit: QuoteExit) => exit(shapes, totem, section))
+              void loadExit().then(runExit)
             },
           },
         })
@@ -122,64 +130,11 @@ function Quote() {
         </div>
 
         <div className="block-1-3-quote__totem" data-anim="totem">
-          <div className="block-1-3-quote__totem-shape" data-totem-shape="square">
-            <svg
-              className="equilibre-shape equilibre-shape--square"
-              viewBox="0 0 132 110"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              aria-hidden="true"
-            >
-              <rect width="132" height="110" fill="currentColor" />
-            </svg>
-          </div>
-          <div className="block-1-3-quote__totem-shape" data-totem-shape="diamond">
-            <svg
-              className="equilibre-shape equilibre-shape--diamond"
-              viewBox="0 0 284 284"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              aria-hidden="true"
-            >
-              <path
-                d="M142.929 283.538L0.928784 143.165L141.071 0.93052L283.071 141.304L142.929 283.538Z"
-                fill="currentColor"
-              />
-              <path
-                d="M142.506 219.214L218.853 141.728L141.494 65.2544L65.1467 142.741L142.506 219.214Z"
-                fill="var(--equilibre-cutout-fill, var(--color-brand-parme, #DBB6FC))"
-              />
-            </svg>
-          </div>
-          <div className="block-1-3-quote__totem-shape" data-totem-shape="circle">
-            <svg
-              className="equilibre-shape equilibre-shape--circle"
-              viewBox="0 0 263 263"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              aria-hidden="true"
-            >
-              <path
-                d="M131.711 262.605C59.5562 263.081 0.475781 204.677 0.000781 132.403C-0.474219 60.1299 57.8334 0.952 129.988 0.476C202.143 0 261.223 58.404 261.698 130.678C262.173 202.951 203.866 262.129 131.711 262.605Z"
-                fill="currentColor"
-              />
-              <path
-                d="M131.417 217.882C178.949 217.569 217.362 178.582 217.049 130.972C216.736 83.362 177.814 44.885 130.282 45.199C82.7503 45.512 44.3369 84.499 44.6499 132.109C44.9629 179.719 83.8853 218.196 131.417 217.882Z"
-                fill="var(--equilibre-cutout-fill, var(--color-brand-parme, #DBB6FC))"
-              />
-            </svg>
-          </div>
-          <div className="block-1-3-quote__totem-shape" data-totem-shape="triangle">
-            <svg
-              className="equilibre-shape equilibre-shape--triangle"
-              viewBox="0 0 132 67"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              aria-hidden="true"
-            >
-              <path d="M132.07 66.144L66.035 0L0 66.144H132.07Z" fill="currentColor" />
-            </svg>
-          </div>
+          {TOTEM_SHAPES.map((shape) => (
+            <div key={shape} className="block-1-3-quote__totem-shape" data-totem-shape={shape}>
+              <EquilibreShape shape={shape} />
+            </div>
+          ))}
         </div>
       </div>
     </section>
