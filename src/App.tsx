@@ -1,6 +1,7 @@
 import HomeEntrance from '@/components/intro/HomeEntrance'
 import Header from '@/components/layout/Header/Header'
 import Hero from '@/components/sections/Hero/Hero'
+import Quote from '@/components/sections/Quote/Quote'
 import RunningLine from '@/components/sections/RunningLine/RunningLine'
 
 function App() {
@@ -11,6 +12,7 @@ function App() {
       <main id="main-content" className="relative w-full pt-(--header-height)">
         <Hero />
         <RunningLine />
+        <Quote />
         {/* Further sections are added incrementally, one at a time. */}
       </main>
       {/* After the content, so the blocks have registered their entrance timelines. */}

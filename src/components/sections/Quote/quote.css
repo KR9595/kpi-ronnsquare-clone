@@ -1,0 +1,85 @@
+/*
+ * Signature quote, ported from the source site's `.block-1-3-quote` block (same class names
+ * and breakpoints). Only the rules the homepage's `--fly-in` variant uses are ported; the
+ * source's `--maron`, `--totem-left`, `--stretch` and `--assemble` variants are left out.
+ * Source tokens are resolved inline and named in comments.
+ */
+
+.block-1-3-quote {
+  background: #ffead4; /* --color-brand-sable */
+  overflow: visible;
+  position: relative;
+  z-index: 2;
+  min-height: 102lvh;
+  margin-top: -2lvh;
+}
+
+.block-1-3-quote__pin-wrapper {
+  height: 100svh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+}
+
+.block-1-3-quote__content {
+  max-width: clamp(45rem, 62.5vw, 75rem);
+  padding: 0 clamp(1.5rem, 2.083vw, 2.5rem); /* --space-figma-40-fluid */
+}
+
+.block-1-3-quote__text {
+  font-family: var(--font-secondary);
+  font-size: clamp(2.4rem, 3.333vw, 4rem); /* --font-size-quote-fluid */
+  font-weight: 400;
+  line-height: 1.1;
+  text-align: center;
+  color: #231800; /* --color-brand-maron */
+}
+
+.block-1-3-quote__totem {
+  position: absolute;
+  right: clamp(2.25rem, 3.125vw, 3.75rem); /* --space-figma-60-fluid */
+  bottom: clamp(2.25rem, 3.125vw, 3.75rem); /* --space-figma-60-fluid */
+  width: clamp(6rem, 8.3333333333vw, 10rem);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #231800; /* --color-brand-maron */
+  --equilibre-cutout-fill: #ffead4; /* --color-brand-sable */
+}
+
+.block-1-3-quote .equilibre-shape {
+  width: 100%;
+  display: block;
+}
+
+/* Hidden until the fly-in timeline shows each shape (autoAlpha). */
+.block-1-3-quote__totem-shape {
+  width: 100%;
+  visibility: hidden;
+  --equilibre-cutout-fill: #231800; /* --color-brand-maron */
+}
+
+@media (max-width: 47.9375em) {
+  .block-1-3-quote__text {
+    font-size: 1.5rem;
+    line-height: 1.2;
+  }
+
+  .block-1-3-quote__totem {
+    position: static;
+    width: 4.875rem;
+    margin: 2.5rem auto 0; /* --space-figma-40 */
+  }
+
+  .block-1-3-quote__pin-wrapper {
+    flex-direction: column;
+    justify-content: center;
+    padding: 1.25rem 0; /* --space-figma-20 */
+  }
+
+  .block-1-3-quote__content {
+    padding: 0 1.25rem; /* --space-figma-20 */
+  }
+}

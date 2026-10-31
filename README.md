@@ -78,6 +78,13 @@ public/
 - The "Our Latest Projects" ticker uses GSAP's `horizontalLoop` helper (`src/lib/horizontalLoop.ts`,
   ported from the source's `horizontal-loop.js`) with Draggable + InertiaPlugin, registered in
   `src/lib/gsap.ts`.
+- The signature quote (`src/components/sections/Quote/`) ports the source's
+  block-1-3-quote-anim.js: a pinned (`end: '+=100%'`), scroll-scrubbed timeline brightens the
+  split characters and flies the totem's shapes in along the source's Lottie-baked keyframes
+  (`src/lib/mainQuoteReveal.ts`, from its main-quote-reveal.js). Scrubs follow the scroll
+  directly from 1024px up and lag 0.3s below (`src/lib/scrub.ts`; `?scrub=0.5` overrides). The
+  block's `data-quote-exit="land"` exit (shapes dropping onto the next block's cards) comes
+  with the Preoccupations block it targets.
 - Homepage intro: a port of the source's entrance (`src/lib/intro/`, mirroring its
   `entrances/home.js`, `brand-clone.js`, `wordmark-reveal.js` and `preloader-data.js`; markup
   in `src/components/intro/` plus the static `#site-loader` and session gate in `index.html`).
