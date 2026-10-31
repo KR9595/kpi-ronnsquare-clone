@@ -21,7 +21,7 @@ html:not(.rs-js) #site-loader {
   }
 }
 
-/* The big logo copy that plays the wordmark reveal (see src/lib/intro/brandClone.ts). */
+/* The big logo copy that plays the wordmark reveal (see src/components/intro/timeline/brandClone.ts). */
 .brand-clone {
   --brand-clone-start-width: min(75vw, 26.25rem);
 

@@ -1,5 +1,5 @@
-import { gsap } from './gsap'
-import { createLogger } from './intro/debug'
+import { gsap } from '@/lib/animation/gsap'
+import { createLogger } from '@/lib/utils/debug'
 
 /*
  * The quote block's "fly-in" totem, ported from the source's main-quote-reveal.js: four

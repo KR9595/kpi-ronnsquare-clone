@@ -1,4 +1,4 @@
-import { createLogger } from './debug'
+import { createLogger } from '@/lib/utils/debug'
 
 /*
  * The loader veil (`#site-loader`, static in index.html) and the once-per-session gate,

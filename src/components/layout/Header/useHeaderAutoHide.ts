@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import type { RefObject } from 'react'
 
-import { gsap } from '@/lib/gsap'
+import { gsap } from '@/lib/animation/gsap'
 
 /** Ignore scroll deltas smaller than this (px) so tiny jitters don't toggle the header. */
 const MIN_DELTA = 8

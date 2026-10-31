@@ -2,13 +2,13 @@ import SplitType from 'split-type'
 
 import { useRef } from 'react'
 
-import { prefersReducedMotion } from '@/lib/entrance'
-import { gsap, useGSAP } from '@/lib/gsap'
-import { buildMainQuoteTimeline } from '@/lib/mainQuoteReveal'
-import { getScrub } from '@/lib/scrub'
+import { prefersReducedMotion } from '@/lib/animation/entrance'
+import { gsap, useGSAP } from '@/lib/animation/gsap'
+import { getScrub } from '@/lib/animation/scrub'
 
 import EquilibreShape, { type EquilibreShapeName } from '@/components/ui/EquilibreShape'
 
+import { buildMainQuoteTimeline } from './mainQuoteReveal'
 import './quote.css'
 
 const QUOTE =
@@ -21,14 +21,14 @@ const TOTEM_SHAPES: EquilibreShapeName[] = ['square', 'diamond', 'circle', 'tria
 type QuoteExit = (shapes: HTMLElement[], totem: HTMLElement, block: HTMLElement) => void
 const QUOTE_EXITS: Record<string, () => Promise<QuoteExit>> = {
   // Drops the shapes onto the next block's (Preoccupations) cards, with Matter.js physics.
-  land: () => import('@/lib/quoteExitLand').then((module) => module.initQuoteExitLand),
+  land: () => import('./quoteExitLand').then((module) => module.initQuoteExitLand),
 }
 
 /**
  * Signature quote (`block-1-3-quote--fly-in`), ported from the source's
  * block-1-3-quote-anim.js: the block pins for one viewport height while its characters
  * brighten one by one (opacity 0.05 → 1) and the totem's shapes fly in along the source's
- * Lottie-baked paths (src/lib/mainQuoteReveal.ts), both scrubbed by the scroll.
+ * Lottie-baked paths (src/components/sections/Quote/mainQuoteReveal.ts), both scrubbed by the scroll.
  */
 function Quote() {
   const sectionRef = useRef<HTMLElement>(null)

@@ -1,6 +1,6 @@
 import type { AnchorHTMLAttributes } from 'react'
 
-import { useMediaQuery } from '@/lib/useMediaQuery'
+import { useMediaQuery } from '@/lib/hooks/useMediaQuery'
 
 import SplitChars from './SplitChars'
 

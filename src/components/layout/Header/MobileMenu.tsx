@@ -1,6 +1,6 @@
 import type { Ref } from 'react'
 
-import { deadLinkProps } from '@/lib/preventNavigation'
+import { deadLinkProps } from '@/lib/utils/preventNavigation'
 
 import { announcement, languages, mobileExtraLinks, primaryNav } from '@/data/navigation'
 

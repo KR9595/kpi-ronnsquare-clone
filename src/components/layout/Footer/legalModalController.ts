@@ -1,4 +1,4 @@
-import { getLenis } from './smoothScroll'
+import { getLenis } from '@/lib/animation/smoothScroll'
 
 /**
  * The Legal Notice / Privacy Policy modals, ported from the source's main.js (`yn("legal")`,

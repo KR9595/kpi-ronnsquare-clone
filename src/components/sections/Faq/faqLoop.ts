@@ -1,4 +1,4 @@
-import { gsap } from './gsap'
+import { gsap } from '@/lib/animation/gsap'
 
 /*
  * The source's faq-loop.js: the FAQ illustration's idle loop, baked from an After Effects

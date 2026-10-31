@@ -2,8 +2,8 @@ import { CustomEase } from 'gsap/CustomEase'
 import { CustomWiggle } from 'gsap/CustomWiggle'
 import Matter from 'matter-js'
 
-import { ScrollTrigger, gsap } from './gsap'
-import { createLogger } from './intro/debug'
+import { ScrollTrigger, gsap } from '@/lib/animation/gsap'
+import { createLogger } from '@/lib/utils/debug'
 
 /*
  * The quote block's `land` exit, ported from the source's quote-exit-land.js (loaded lazily

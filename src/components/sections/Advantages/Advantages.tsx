@@ -2,12 +2,12 @@ import type { ReactNode } from 'react'
 import { useRef } from 'react'
 
 // Importing effects also registers the timeline effects (splitReveal, …).
-import { revertSplitReveal } from '@/lib/effects'
-import { prefersReducedMotion } from '@/lib/entrance'
-import { ScrollTrigger, gsap, useGSAP } from '@/lib/gsap'
-import { initTotemSway } from '@/lib/totemSway'
+import { revertSplitReveal } from '@/lib/animation/effects'
+import { prefersReducedMotion } from '@/lib/animation/entrance'
+import { ScrollTrigger, gsap, useGSAP } from '@/lib/animation/gsap'
 
 import './advantages.css'
+import { initTotemSway } from './totemSway'
 
 interface Advantage {
   badge: ReactNode

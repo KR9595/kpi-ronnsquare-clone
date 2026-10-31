@@ -1,4 +1,4 @@
-import { showSuccessPopup } from './successPopup'
+import { showSuccessPopup } from './successPopupController'
 
 type Field = HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
 

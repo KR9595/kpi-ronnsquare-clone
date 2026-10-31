@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 
-import { gsap, useGSAP } from '@/lib/gsap'
-import { deadLinkProps } from '@/lib/preventNavigation'
+import { gsap, useGSAP } from '@/lib/animation/gsap'
+import { deadLinkProps } from '@/lib/utils/preventNavigation'
 
 import { announcement, primaryNav } from '@/data/navigation'
 

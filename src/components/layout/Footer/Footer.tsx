@@ -1,4 +1,4 @@
-import { deadLinkProps, preventNavigation } from '@/lib/preventNavigation'
+import { deadLinkProps, preventNavigation } from '@/lib/utils/preventNavigation'
 
 import { footerNav } from '@/data/navigation'
 

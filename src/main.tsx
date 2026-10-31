@@ -1,12 +1,13 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 
+import { ScrollTrigger, gsap } from '@/lib/animation/gsap'
+import { getLenis, initSmoothScroll } from '@/lib/animation/smoothScroll'
+import { isDebug } from '@/lib/utils/debug'
+import { initReloadOnResize } from '@/lib/utils/reloadOnResize'
+
 import App from './App.tsx'
 import './index.css'
-import { ScrollTrigger, gsap } from './lib/gsap'
-import { isDebug } from './lib/intro/debug'
-import { initReloadOnResize } from './lib/reloadOnResize'
-import { getLenis, initSmoothScroll } from './lib/smoothScroll'
 
 initSmoothScroll()
 initReloadOnResize()

@@ -1,7 +1,8 @@
 import { useEffect, useRef } from 'react'
 
-import { initNewsletterForm } from '@/lib/newsletterForm'
-import { preventNavigation } from '@/lib/preventNavigation'
+import { preventNavigation } from '@/lib/utils/preventNavigation'
+
+import { initNewsletterForm } from './newsletterFormController'
 
 interface NewsletterFormProps {
   /** The source renders the form twice (phone and desktop layouts); ids carry the variant. */

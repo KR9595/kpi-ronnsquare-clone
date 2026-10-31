@@ -1,6 +1,6 @@
-import { gsap } from '@/lib/gsap'
+import { gsap } from '@/lib/animation/gsap'
+import { createLogger } from '@/lib/utils/debug'
 
-import { createLogger } from './debug'
 import { PRELOADER_DATA } from './preloaderData'
 import type { ShapeTrack } from './preloaderData'
 

@@ -1,16 +1,16 @@
 import { useRef } from 'react'
 
 // Importing effects also registers the timeline effects (splitReveal, …).
-import { revertSplitReveal } from '@/lib/effects'
-import { prefersReducedMotion } from '@/lib/entrance'
-import { ScrollTrigger, gsap, useGSAP } from '@/lib/gsap'
-import { initParallax } from '@/lib/parallax'
-import { deadLinkProps } from '@/lib/preventNavigation'
-import { initServicesTotem } from '@/lib/servicesTotem'
+import { revertSplitReveal } from '@/lib/animation/effects'
+import { prefersReducedMotion } from '@/lib/animation/entrance'
+import { ScrollTrigger, gsap, useGSAP } from '@/lib/animation/gsap'
+import { initParallax } from '@/lib/animation/parallax'
+import { deadLinkProps } from '@/lib/utils/preventNavigation'
 
 import Button from '@/components/ui/Button'
 
 import './services.css'
+import { initServicesTotem } from './servicesTotem'
 
 interface Service {
   theme: 'dark' | 'parme' | 'sable'

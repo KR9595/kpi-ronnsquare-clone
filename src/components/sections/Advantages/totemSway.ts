@@ -1,4 +1,4 @@
-import { ScrollTrigger, gsap } from './gsap'
+import { ScrollTrigger, gsap } from '@/lib/animation/gsap'
 
 /*
  * The "équilibre" totem's idle sway, ported from the source's totem-sway.js: the diamond +

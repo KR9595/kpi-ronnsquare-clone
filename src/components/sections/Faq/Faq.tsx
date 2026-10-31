@@ -1,12 +1,12 @@
 import { useRef } from 'react'
 
 // Importing effects also registers the timeline effects (splitReveal, …).
-import { revertSplitReveal } from '@/lib/effects'
-import { prefersReducedMotion, registerBlockTimeline } from '@/lib/entrance'
-import { buildFaqLoop } from '@/lib/faqLoop'
-import { ScrollTrigger, gsap, useGSAP } from '@/lib/gsap'
+import { revertSplitReveal } from '@/lib/animation/effects'
+import { prefersReducedMotion, registerBlockTimeline } from '@/lib/animation/entrance'
+import { ScrollTrigger, gsap, useGSAP } from '@/lib/animation/gsap'
 
 import './faq.css'
+import { buildFaqLoop } from './faqLoop'
 
 const QUESTIONS = [
   {

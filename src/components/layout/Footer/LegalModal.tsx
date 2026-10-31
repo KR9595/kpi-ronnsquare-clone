@@ -1,10 +1,9 @@
 import { useEffect, useRef } from 'react'
 
-import { initLegalModal } from '@/lib/legalModal'
-
 import { type LegalDoc, legalSections } from '@/data/legal'
 
 import './legal-modal.css'
+import { initLegalModal } from './legalModalController'
 
 const MODALS: Record<LegalDoc, { blockClass: string; title: string }> = {
   legal: { blockClass: 'legal-mentions', title: 'Legal Notice' },

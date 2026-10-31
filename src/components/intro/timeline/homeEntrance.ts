@@ -1,4 +1,5 @@
-import { gsap } from '@/lib/gsap'
+import { gsap } from '@/lib/animation/gsap'
+import { createLogger, getSlowmo } from '@/lib/utils/debug'
 
 import {
   getClone,
@@ -9,7 +10,6 @@ import {
   stageClone,
 } from './brandClone'
 import type { ClonePositions } from './brandClone'
-import { createLogger, getSlowmo } from './debug'
 import { animateHeaderIn, revealHeader } from './headerEntrance'
 import { addGridReveal, isFirstSessionLoad } from './loaderReveal'
 import { buildWordmarkReveal } from './wordmarkReveal'

@@ -1,15 +1,15 @@
 import { useRef } from 'react'
 
 // Importing effects also registers the timeline effects (splitReveal, …).
-import { revertSplitReveal } from '@/lib/effects'
-import { prefersReducedMotion } from '@/lib/entrance'
-import { ScrollTrigger, gsap, useGSAP } from '@/lib/gsap'
-import { deadLinkProps } from '@/lib/preventNavigation'
-import { initProjectSlideshow } from '@/lib/projectsSlideshow'
+import { revertSplitReveal } from '@/lib/animation/effects'
+import { prefersReducedMotion } from '@/lib/animation/entrance'
+import { ScrollTrigger, gsap, useGSAP } from '@/lib/animation/gsap'
+import { deadLinkProps } from '@/lib/utils/preventNavigation'
 
 import Button from '@/components/ui/Button'
 
 import './projects.css'
+import { initProjectSlideshow } from './projectsSlideshow'
 
 interface ProjectImage {
   base: string

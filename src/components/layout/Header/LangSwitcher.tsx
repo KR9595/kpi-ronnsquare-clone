@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react'
 
-import { deadLinkProps } from '@/lib/preventNavigation'
+import { deadLinkProps } from '@/lib/utils/preventNavigation'
 
 import { languages } from '@/data/navigation'
 

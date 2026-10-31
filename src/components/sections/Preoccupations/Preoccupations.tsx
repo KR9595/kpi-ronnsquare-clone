@@ -1,10 +1,10 @@
 import { useRef } from 'react'
 
 // Importing effects also registers the timeline effects (splitReveal, …).
-import { revertSplitReveal } from '@/lib/effects'
-import { prefersReducedMotion } from '@/lib/entrance'
-import { ScrollTrigger, gsap, useGSAP } from '@/lib/gsap'
-import { deadLinkProps } from '@/lib/preventNavigation'
+import { revertSplitReveal } from '@/lib/animation/effects'
+import { prefersReducedMotion } from '@/lib/animation/entrance'
+import { ScrollTrigger, gsap, useGSAP } from '@/lib/animation/gsap'
+import { deadLinkProps } from '@/lib/utils/preventNavigation'
 
 import Button from '@/components/ui/Button'
 import EquilibreShape, { type EquilibreShapeName } from '@/components/ui/EquilibreShape'
@@ -52,7 +52,7 @@ const ENTRANCE_START = 60
  * "Your Challenges" (`block-1-4-preoccupations--shapes`), ported from the source's
  * block-1-4-preoccupations-anim.js: the title lines slide up, then the card bodies fade up
  * one after another. The cards' shapes stay hidden; the quote's totem shapes fall onto them
- * (the quote's `land` exit, src/lib/quoteExitLand.ts).
+ * (the quote's `land` exit, src/components/sections/Quote/quoteExitLand.ts).
  */
 function Preoccupations() {
   const sectionRef = useRef<HTMLElement>(null)

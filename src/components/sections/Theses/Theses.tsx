@@ -1,9 +1,9 @@
 import { useRef } from 'react'
 
 // Importing effects also registers the timeline effects (splitReveal, …).
-import { revertSplitReveal } from '@/lib/effects'
-import { prefersReducedMotion, registerBlockTimeline } from '@/lib/entrance'
-import { gsap, useGSAP } from '@/lib/gsap'
+import { revertSplitReveal } from '@/lib/animation/effects'
+import { prefersReducedMotion, registerBlockTimeline } from '@/lib/animation/entrance'
+import { gsap, useGSAP } from '@/lib/animation/gsap'
 
 import './theses.css'
 

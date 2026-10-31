@@ -1,4 +1,4 @@
-import { Draggable, ScrollTrigger, gsap } from './gsap'
+import { Draggable, ScrollTrigger, gsap } from '@/lib/animation/gsap'
 
 /*
  * A project card's image slideshow, ported from the source's block-1-8-projects-anim.js.

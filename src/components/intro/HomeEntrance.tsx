@@ -1,8 +1,9 @@
 import { useEffect } from 'react'
 
-import { getAboveFoldTimeline } from '@/lib/entrance'
-import { gsap } from '@/lib/gsap'
-import { buildHomeEntrance, killScrollShrink } from '@/lib/intro/homeEntrance'
+import { getAboveFoldTimeline } from '@/lib/animation/entrance'
+import { gsap } from '@/lib/animation/gsap'
+
+import { buildHomeEntrance, killScrollShrink } from '@/components/intro/timeline/homeEntrance'
 
 import BrandClone from './BrandClone'
 import './intro.css'
@@ -16,7 +17,7 @@ function nextFrames() {
 
 /**
  * Homepage intro: renders the brand clone and, once the page's blocks have built their
- * timelines, runs the entrance (src/lib/intro/homeEntrance.ts). Render it after the page
+ * timelines, runs the entrance (src/components/intro/timeline/homeEntrance.ts). Render it after the page
  * content: the hero registers its above-fold timeline once the webfonts are in, and this
  * waits for the same promise plus two frames, as the source waits for its blocks.
  */

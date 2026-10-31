@@ -1,4 +1,4 @@
-import { gsap } from '@/lib/gsap'
+import { gsap } from '@/lib/animation/gsap'
 
 /*
  * The header's own entrance, ported from the source's main.js: the bars either appear at

@@ -1,4 +1,4 @@
-import { Draggable, ScrollTrigger, gsap } from './gsap'
+import { Draggable, ScrollTrigger, gsap } from '@/lib/animation/gsap'
 
 /*
  * The testimonials slider, ported from the source's block-1-9-card-reviews-anim.js. Slides

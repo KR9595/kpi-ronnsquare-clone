@@ -1,5 +1,6 @@
-import { ScrollTrigger, gsap } from './gsap'
-import { getScrub } from './scrub'
+import { ScrollTrigger, gsap } from '@/lib/animation/gsap'
+import { getScrub } from '@/lib/animation/scrub'
+
 import { FLIP_KEYS, FORMATION, SLINKY_ROLES } from './servicesTotemData'
 
 /*

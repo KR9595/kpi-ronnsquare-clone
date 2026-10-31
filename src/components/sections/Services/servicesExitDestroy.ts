@@ -1,6 +1,6 @@
 import Matter from 'matter-js'
 
-import { gsap } from './gsap'
+import { gsap } from '@/lib/animation/gsap'
 
 /*
  * The "Our Support" totem's exit, ported from the source's services-exit-destroy.js (loaded

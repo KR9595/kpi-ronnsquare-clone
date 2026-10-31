@@ -1,6 +1,5 @@
-import { gsap } from '@/lib/gsap'
-
-import { createLogger } from './debug'
+import { gsap } from '@/lib/animation/gsap'
+import { createLogger } from '@/lib/utils/debug'
 
 /*
  * The brand clone, ported from the source's brand-clone.js: a big fixed copy of the logo
