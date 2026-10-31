@@ -3,6 +3,7 @@ import Header from '@/components/layout/Header/Header'
 import Advantages from '@/components/sections/Advantages/Advantages'
 import Hero from '@/components/sections/Hero/Hero'
 import Preoccupations from '@/components/sections/Preoccupations/Preoccupations'
+import Projects from '@/components/sections/Projects/Projects'
 import Quote from '@/components/sections/Quote/Quote'
 import RunningLine from '@/components/sections/RunningLine/RunningLine'
 import Services from '@/components/sections/Services/Services'
@@ -21,6 +22,7 @@ function App() {
         <Advantages />
         <Theses />
         <Services />
+        <Projects />
         {/* Further sections are added incrementally, one at a time. */}
       </main>
       {/* After the content, so the blocks have registered their entrance timelines. */}

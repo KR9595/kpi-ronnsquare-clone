@@ -1,0 +1,206 @@
+/*
+ * "Our Projects" grid, ported from the source site's `.block-1-8-projects` block (same class
+ * names and breakpoints; the load-more, filter and related-projects variants are left out).
+ * Source tokens are resolved inline and named in comments.
+ */
+
+.block-1-8-projects {
+  position: relative;
+  padding: 2.5rem 0.625rem; /* --space-figma-40 */
+  background: #ffead4; /* --color-brand-sable */
+}
+
+@media (min-width: 48em) {
+  .block-1-8-projects {
+    /* --space-figma-200-fluid, --space-figma-60-fluid */
+    padding: clamp(7.5rem, 10.417vw, 12.5rem) clamp(2.25rem, 3.125vw, 3.75rem);
+  }
+}
+
+.block-1-8-projects__title {
+  font-family: var(--font-primary);
+  font-weight: 700; /* --font-weight-bold */
+  font-size: 1.75rem; /* --font-size-h2-mobile */
+  line-height: 1.1;
+  text-transform: uppercase;
+  color: #231800; /* --color-headline-maron */
+  margin-bottom: 2.5rem; /* --space-figma-40 */
+}
+
+@media (min-width: 48em) {
+  .block-1-8-projects__title {
+    font-size: clamp(4.5rem, 6.25vw, 7.5rem); /* --font-size-h1-fluid */
+    line-height: 1.05; /* --line-height-tight */
+    text-align: center;
+    margin-bottom: clamp(1.5rem, 2.083vw, 2.5rem); /* --space-figma-40-fluid */
+  }
+}
+
+.block-1-8-projects__grid {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem; /* --space-figma-40 */
+}
+
+@media (min-width: 48em) {
+  .block-1-8-projects__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(1.5rem, 2.083vw, 2.5rem); /* --space-figma-40-fluid */
+  }
+}
+
+.block-1-8-projects__card {
+  position: relative;
+  overflow: hidden;
+  height: 37.5rem;
+  padding: 0.625rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 0.625rem; /* --space-figma-10 */
+}
+
+@media (min-width: 48em) {
+  .block-1-8-projects__card {
+    height: clamp(33.75rem, 46.875vw, 56.25rem);
+    padding: clamp(0.75rem, 1.042vw, 1.25rem); /* --space-figma-20-fluid */
+  }
+
+  .block-1-8-projects__card--full {
+    grid-column: 1 / -1;
+  }
+}
+
+.block-1-8-projects__slideshow {
+  position: absolute;
+  inset: 0;
+  will-change: transform, clip-path;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.block-1-8-projects__image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+}
+
+.block-1-8-projects__image--active {
+  opacity: 1;
+}
+
+.block-1-8-projects__gradient {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(to bottom, #0000, #0003);
+  pointer-events: none;
+}
+
+.block-1-8-projects__zones {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: none;
+}
+
+@media (min-width: 48em) {
+  .block-1-8-projects__zones {
+    display: flex;
+  }
+}
+
+.block-1-8-projects__zone {
+  flex: 1;
+  cursor: pointer;
+}
+
+.block-1-8-projects__info {
+  position: relative;
+  z-index: 3;
+  background: #231800; /* --color-brand-maron */
+  padding: 1.25rem; /* --space-figma-20 */
+  width: 18.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem; /* --space-figma-20 */
+}
+
+.block-1-8-projects__company {
+  font-family: var(--font-primary);
+  font-weight: 700; /* --font-weight-bold */
+  font-size: 1.5rem; /* --font-size-h6 */
+  line-height: 1.1;
+  text-transform: uppercase;
+  color: #ffead4; /* --color-headline-sable */
+}
+
+.block-1-8-projects__details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+}
+
+.block-1-8-projects__location {
+  font-family: var(--font-secondary);
+  font-weight: 400; /* --font-weight-regular */
+  font-size: 0.875rem; /* --font-size-sm */
+  line-height: 1.3; /* --line-height-normal */
+  color: #ffead4cc; /* --color-text-sable */
+}
+
+@media (min-width: 48em) {
+  .block-1-8-projects__location {
+    font-size: 1rem; /* --font-size-base */
+  }
+}
+
+.block-1-8-projects__btn {
+  align-self: flex-start;
+}
+
+.block-1-8-projects__scroll-bar {
+  position: relative;
+  z-index: 4;
+  display: none;
+  gap: 0.9375rem;
+  width: 100%;
+}
+
+[data-has-slideshow] .block-1-8-projects__scroll-bar {
+  display: flex;
+}
+
+@media (min-width: 48em) {
+  .block-1-8-projects__scroll-bar {
+    display: flex;
+  }
+}
+
+.block-1-8-projects__bar {
+  flex: 1;
+  height: 0.09375rem;
+  background: #ffead4; /* --color-brand-sable */
+  opacity: 0.4;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.block-1-8-projects__bar:first-child {
+  opacity: 1;
+}
+
+.block-1-8-projects__cta {
+  margin-top: 2.5rem; /* --space-figma-40 */
+  display: flex;
+  justify-content: center;
+}
+
+@media (min-width: 48em) {
+  .block-1-8-projects__cta {
+    margin-top: clamp(1.5rem, 2.083vw, 2.5rem); /* --space-figma-40-fluid */
+  }
+}

@@ -64,6 +64,8 @@ public/
       triangle wipe; checked at 1440×900, 1024×768 and 375×812)
 - [x] "Ronnsquare is" key figures and "Our Support" services list (card images with
       parallax, flipping totem with its tipping exit; checked at 1440×900, 1024×768 and 375×812)
+- [x] "Our Projects" grid (image slideshows: hover zones and bars from 768px, autoplay,
+      swipe and tap below; entrances; checked at 1440×900, 1024×768 and 375×812)
 - [ ] Remaining homepage sections
 - [ ] Footer
 
@@ -119,6 +121,13 @@ public/
   the block's bottom goes from 95% to 55%. `?slinky=0` turns off the per-shape lag, as on the
   source. Card images use the source's global `data-parallax` attributes
   (`src/lib/parallax.ts`).
+- "Our Projects" (`src/components/sections/Projects/`) ports block-1-8-projects-anim.js: the
+  title, each card (image wipe + info box) and the CTA play their own entrance at `top 85%`.
+  Each card is a three-image slideshow (`src/lib/projectsSlideshow.ts`): from 768px up the
+  card's thirds crossfade to their image on hover (0.35s) and back to the first on leave;
+  below 768px the images advance every 3s while the card is on screen, a swipe goes to the
+  next/previous image, a tap advances and a double tap "clicks" Discover (Draggable on a
+  detached proxy, as on the source). The bars jump to their image at every size.
 - Homepage intro: a port of the source's entrance (`src/lib/intro/`, mirroring its
   `entrances/home.js`, `brand-clone.js`, `wordmark-reveal.js` and `preloader-data.js`; markup
   in `src/components/intro/` plus the static `#site-loader` and session gate in `index.html`).
