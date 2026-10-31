@@ -65,9 +65,8 @@ function Hero() {
         if (image) timeline.revealImage(image, { duration: 1 }, '<0.2')
         if (button) timeline.fadeSlideUp(button, { y: 24, duration: 0.6 }, '<0.4')
 
+        // Above the fold: the homepage entrance plays it at its `content` label.
         unregister = registerBlockTimeline(section, timeline)
-        // The homepage intro (Part 2) will play this after the loader; until then, play now.
-        timeline.play()
       })
       void document.fonts.ready.then(build)
 

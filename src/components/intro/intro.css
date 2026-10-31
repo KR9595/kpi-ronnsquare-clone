@@ -1,0 +1,61 @@
+/*
+ * Homepage intro styles, ported from the source's loader / brand-clone / home-entrance
+ * rules. The loader veil itself is static markup in index.html.
+ */
+
+/* No JS: the loader fades on its own after 1.2s. */
+html:not(.rs-js) #site-loader {
+  animation: rs-loader-failsafe 0.4s ease 1.2s forwards;
+}
+
+@keyframes rs-loader-failsafe {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #site-loader {
+    display: none !important;
+  }
+}
+
+/* The big logo copy that plays the wordmark reveal (see src/lib/intro/brandClone.ts). */
+.brand-clone {
+  --brand-clone-start-width: min(75vw, 26.25rem);
+
+  display: block;
+  overflow: visible;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 220;
+  transform-origin: top left;
+  pointer-events: none;
+  color: var(--color-ink); /* --color-brand-maron */
+  visibility: hidden;
+  opacity: 0;
+}
+
+@media (min-width: 48em) {
+  .brand-clone {
+    --brand-clone-start-width: clamp(25.875rem, 35.9375vw, 43.125rem);
+    /* How far below the header logo's top the clone's art sits while it rests on the hero. */
+    --brand-clone-hero-offset-y: clamp(2.4rem, 3.3333333333vw, 4rem);
+  }
+}
+
+.brand-clone svg {
+  display: block;
+  height: auto;
+  overflow: visible;
+}
+
+/* Until the entrance hands them over, the header logo, nav items and buttons stay hidden. */
+.is-home-entrance .header-ronn__logo,
+.is-home-entrance .header-ronn__nav-item,
+.is-home-entrance .header-ronn__actions > * {
+  visibility: hidden;
+  opacity: 0;
+}

@@ -1,3 +1,4 @@
+import HomeEntrance from '@/components/intro/HomeEntrance'
 import Header from '@/components/layout/Header/Header'
 import Hero from '@/components/sections/Hero/Hero'
 
@@ -10,6 +11,8 @@ function App() {
         <Hero />
         {/* Further sections are added incrementally, one at a time. */}
       </main>
+      {/* After the content, so the blocks have registered their entrance timelines. */}
+      <HomeEntrance />
     </>
   )
 }

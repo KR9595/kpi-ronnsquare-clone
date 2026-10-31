@@ -32,9 +32,11 @@ src/
     ui/        # Reusable primitives (Button, Logo, ChevronIcon, SplitChars)
     layout/    # Page chrome (Header, and later Footer)
     sections/  # Homepage blocks (Hero, …), each with its ported CSS
+    intro/     # Homepage intro markup (brand clone) and its CSS
   data/        # Static content (nav links, etc.)
   lib/         # gsap.ts (plugins), smoothScroll.ts (Lenis + ScrollTrigger), effects.ts (the
                # source's GSAP effects), entrance.ts (block entrance wiring), small helpers
+    intro/     # Homepage entrance timeline builders (loader, wordmark, brand clone, header)
 public/
   fonts/       # Original N27 + Gambetta woff2 files
   images/      # Original photos (hero srcset)
@@ -49,6 +51,9 @@ public/
       at 1440×900, 1024×768 and 375×812
 - [x] Hero section (layout, image srcset, entrance timeline; checked at 1440×900, 1024×768
       and 375×812)
+- [x] Homepage entrance (wordmark preloader, brand clone to hero + scroll shrink into the
+      header, mobile settle, repeat-visit quick entrance; checked against the source's
+      timeline at 1440×900, 1024×768 and 375×812)
 - [ ] Remaining homepage sections
 - [ ] Footer
 
@@ -66,8 +71,16 @@ public/
 - Block entrances use the source's GSAP effects (`splitReveal`, `revealImage`, `fadeSlideUp`,
   `clipReveal`), ported to `src/lib/effects.ts` with the same defaults; titles are split with
   SplitType (pinned 0.3.4), as on the source. Above-fold blocks (`data-entrance="above-fold"`)
-  register a paused timeline via `src/lib/entrance.ts` for the homepage intro to play; until
-  the intro exists, the hero plays its own on mount.
+  register a paused timeline via `src/lib/entrance.ts`; the homepage intro plays it at its
+  `content` label.
+- Homepage intro: a port of the source's entrance (`src/lib/intro/`, mirroring its
+  `entrances/home.js`, `brand-clone.js`, `wordmark-reveal.js` and `preloader-data.js`; markup
+  in `src/components/intro/` plus the static `#site-loader` and session gate in `index.html`).
+  The full wordmark preloader plays once per browser session; clear `sessionStorage` (or use a
+  new tab) to see it again. URL params as on the source: `?slowmo=4` slows the first-load
+  entrance down 4×, `?debug` logs each step and exposes `window.gsap` / `ScrollTrigger` /
+  `lenis` (e.g. `gsap.getById('entrance').labels`). As on the source, a width change reloads
+  the page.
 - Only English is built. Links to other pages render `href="#"` and don't navigate; the
   language switcher lists English only.
 - Reference material from the source site (HTML, CSS, JS) lives in

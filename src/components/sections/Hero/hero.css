@@ -25,6 +25,15 @@
   overflow: hidden;
 }
 
+/*
+ * First load: the image paints under the loader veil (so the browser records it as the LCP)
+ * and the entrance's `revealImage` stamps its clipped start state before the veil lifts.
+ */
+html.rs-first-load .block-1-1-hero__image.anim-hidden {
+  visibility: visible;
+  opacity: 1;
+}
+
 @media (min-width: 48em) {
   .block-1-1-hero__image {
     height: auto;

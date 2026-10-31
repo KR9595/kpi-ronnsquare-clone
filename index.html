@@ -4,6 +4,30 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      history.scrollRestoration = 'manual'
+      window.scrollTo(0, 0)
+    </script>
+    <script>
+      /*
+       * Once-per-session preloader gate, copied from the source site's <head>; it runs before
+       * first paint. The big wordmark preloader plays only on the first fresh load of a
+       * session; later loads get `rs-preloader-seen` and a quick loader fade instead
+       * (src/lib/intro/loaderReveal.ts). `rs-js` gates the no-JS loader failsafe;
+       * `rs-first-load` lets the hero image paint under the loader (see hero.css).
+       */
+      document.documentElement.classList.add('rs-js')
+      document.documentElement.classList.add('rs-first-load')
+      ;(function () {
+        try {
+          if (sessionStorage.getItem('rsPreloaderSeen')) {
+            document.documentElement.classList.add('rs-preloader-seen')
+          } else {
+            sessionStorage.setItem('rsPreloaderSeen', '1')
+          }
+        } catch (e) {}
+      })()
+    </script>
     <link rel="preload" href="/fonts/N27-Regular.woff2" as="font" type="font/woff2" crossorigin />
     <link
       rel="preload"
@@ -14,7 +38,13 @@
     />
     <title>Ronnsquare Clone — Workplace Design &amp; Fit-Out</title>
   </head>
-  <body>
+  <body class="is-home-entrance">
+    <!-- Loader veil, static like the source so it covers the page before React mounts. -->
+    <div
+      id="site-loader"
+      style="position: fixed; inset: 0; z-index: 210; background: #dbb6fc; pointer-events: none"
+      aria-hidden="true"
+    ></div>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
