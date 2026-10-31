@@ -1,4 +1,4 @@
-import { deadLinkProps } from '@/lib/preventNavigation'
+import { deadLinkProps, preventNavigation } from '@/lib/preventNavigation'
 
 import { footerNav } from '@/data/navigation'
 
@@ -24,6 +24,7 @@ function LinkedInLink() {
       className="footer-ronn__social-link"
       target="_blank"
       rel="noopener"
+      onClick={preventNavigation}
       aria-label="LinkedIn"
     >
       <span className="footer-ronn__social-icon">
@@ -216,6 +217,7 @@ function Footer() {
           href="https://colibrity.com/en/"
           target="_blank"
           rel="noopener"
+          onClick={preventNavigation}
           aria-label="Made by Colibrity — colibrity.com"
         >
           <span className="footer-ronn__credit-label">Made by</span>

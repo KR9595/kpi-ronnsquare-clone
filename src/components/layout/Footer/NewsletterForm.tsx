@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react'
 
 import { initNewsletterForm } from '@/lib/newsletterForm'
+import { preventNavigation } from '@/lib/preventNavigation'
 
 interface NewsletterFormProps {
   /** The source renders the form twice (phone and desktop layouts); ids carry the variant. */
@@ -92,11 +93,21 @@ function NewsletterForm({ variant }: NewsletterFormProps) {
               Privacy Policy
             </a>
             . It is also protected by reCAPTCHA and the Google{' '}
-            <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">
+            <a
+              href="https://policies.google.com/privacy"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={preventNavigation}
+            >
               Privacy Policy
             </a>{' '}
             and{' '}
-            <a href="https://policies.google.com/terms" target="_blank" rel="noopener noreferrer">
+            <a
+              href="https://policies.google.com/terms"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={preventNavigation}
+            >
               Terms of Service
             </a>{' '}
             apply.
