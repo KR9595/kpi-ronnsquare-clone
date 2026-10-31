@@ -60,6 +60,8 @@ public/
 - [x] "Your Challenges" preoccupations (shape cards, entrance) with the quote's `land` exit:
       the totem shapes fall onto the cards (Matter.js), plus the desktop triangle wipe; checked
       at 1440×900, 1024×768 and 375×812
+- [x] Advantages (two columns around the swaying totem; from 1024px up it chains off the
+      triangle wipe; checked at 1440×900, 1024×768 and 375×812)
 - [ ] Remaining homepage sections
 - [ ] Footer
 
@@ -93,9 +95,16 @@ public/
   by the source) is baked once and scrubbed by the scroll, so the fall is the same on every
   run for a given viewport; `?fallSeed=<n>` changes the seed. From 1024px up the triangle
   card's own shape then pins and scales into a full-screen wipe until the block after
-  Preoccupations (Advantages, still to build) scrolls over it — the wipe only starts once a
-  `[data-block]` follows Preoccupations. CustomEase/CustomWiggle are registered in that lazy
+  Preoccupations (Advantages) scrolls over it — the wipe only starts once a `[data-block]`
+  follows Preoccupations. CustomEase/CustomWiggle are registered in that lazy
   module, as on the source.
+- Advantages (`src/components/sections/Advantages/`) ports block-1-5-advantages-anim.js. From
+  1024px up, right after Preoccupations, it adds `is-wipe-chain` (z-index 1, above the pinned
+  triangle): its background starts transparent and scrubs to parme while its top goes from
+  30% to the viewport top, the totem slides in with a parallax over the same approach, and the
+  entrance plays at `top 20%`. Below 1024px the entrance plays at `top 75%` and the background
+  steps from sable to parme (0.8s) when the block reaches the top. The totem's idle sway is
+  `src/lib/totemSway.ts` (the source's totem-sway.js).
 - Homepage intro: a port of the source's entrance (`src/lib/intro/`, mirroring its
   `entrances/home.js`, `brand-clone.js`, `wordmark-reveal.js` and `preloader-data.js`; markup
   in `src/components/intro/` plus the static `#site-loader` and session gate in `index.html`).

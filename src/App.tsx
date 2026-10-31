@@ -1,5 +1,6 @@
 import HomeEntrance from '@/components/intro/HomeEntrance'
 import Header from '@/components/layout/Header/Header'
+import Advantages from '@/components/sections/Advantages/Advantages'
 import Hero from '@/components/sections/Hero/Hero'
 import Preoccupations from '@/components/sections/Preoccupations/Preoccupations'
 import Quote from '@/components/sections/Quote/Quote'
@@ -15,6 +16,7 @@ function App() {
         <RunningLine />
         <Quote />
         <Preoccupations />
+        <Advantages />
         {/* Further sections are added incrementally, one at a time. */}
       </main>
       {/* After the content, so the blocks have registered their entrance timelines. */}
