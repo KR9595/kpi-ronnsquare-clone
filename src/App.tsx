@@ -1,4 +1,5 @@
 import Header from '@/components/layout/Header/Header'
+import Hero from '@/components/sections/Hero/Hero'
 
 function App() {
   return (
@@ -6,7 +7,8 @@ function App() {
       <Header />
       {/* The header is fixed, so content starts below it. */}
       <main id="main-content" className="relative w-full pt-(--header-height)">
-        {/* Sections are added incrementally, one at a time. */}
+        <Hero />
+        {/* Further sections are added incrementally, one at a time. */}
       </main>
     </>
   )

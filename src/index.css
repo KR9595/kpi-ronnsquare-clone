@@ -133,6 +133,24 @@ html.lenis body {
   overflow: clip;
 }
 
+/* Blocks start hidden and their entrance timelines reveal them (see src/lib/effects.ts). */
+.anim-hidden {
+  visibility: hidden;
+  opacity: 0;
+}
+
+/* `splitReveal`: each split line is masked by its wrapper and slides up into view. */
+.reveal-line-wrapper {
+  display: block;
+  overflow: hidden;
+  line-height: inherit;
+}
+
+.reveal-line {
+  display: inline-block;
+  transform-origin: center top;
+}
+
 /* Lock page scroll while the mobile menu is open. */
 .is-header-menu-open {
   overflow: hidden;
@@ -215,6 +233,21 @@ html.lenis body {
 
   .btn:hover .btn__label span {
     transform: translateY(-1.3em) rotate(0.001deg);
+  }
+
+  /* Source button variants used by the page blocks. */
+  .btn--maron {
+    --btn-bg: var(--color-ink);
+    --btn-label: var(--color-cream);
+    --btn-bg-hover: var(--color-lilac);
+    --btn-label-hover: var(--color-ink);
+    --btn-border: transparent;
+  }
+
+  .btn--lg {
+    --btn-height: 3.75rem;
+    --btn-font-size: 1.5rem;
+    --btn-pad-x: 1.875rem;
   }
 
   .btn--full {

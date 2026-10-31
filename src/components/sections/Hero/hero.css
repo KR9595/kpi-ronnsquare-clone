@@ -1,0 +1,105 @@
+/*
+ * Hero styles, ported from the source site's `.block-1-1-hero` block (same class names and
+ * breakpoints). Source tokens are resolved inline and named in comments.
+ */
+
+.block-1-1-hero {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem; /* --space-figma-20 */
+  padding: 0 0.625rem; /* --page-edge */
+}
+
+@media (min-width: 48em) {
+  .block-1-1-hero {
+    display: grid;
+    grid-template-columns: 1fr 0.88fr;
+    gap: clamp(1.875rem, 2.6041666667vw, 3.125rem);
+    padding: 0 clamp(2.25rem, 3.125vw, 3.75rem); /* --space-figma-60-fluid */
+  }
+}
+
+.block-1-1-hero__image {
+  width: 100%;
+  height: 20.75rem;
+  overflow: hidden;
+}
+
+@media (min-width: 48em) {
+  .block-1-1-hero__image {
+    height: auto;
+    aspect-ratio: 802 / 848;
+    order: 2;
+  }
+}
+
+.block-1-1-hero__image-inner {
+  display: block;
+  width: 100%;
+  height: 100%;
+  will-change: transform, clip-path;
+}
+
+.block-1-1-hero__image-inner img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.block-1-1-hero__content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.25rem; /* --space-figma-20 */
+}
+
+@media (min-width: 48em) {
+  .block-1-1-hero__content {
+    justify-content: center;
+    gap: clamp(1.125rem, 1.563vw, 1.875rem); /* --space-figma-30-fluid */
+    /* Room for the intro's "RONN SQUARE" wordmark (brand-clone), which lands above the title. */
+    padding-top: clamp(10.5rem, 14.5833333333vw, 17.5rem);
+    order: 1;
+  }
+}
+
+.block-1-1-hero__heading {
+  margin: 0;
+  font-family: var(--font-primary);
+  font-weight: 700; /* Only N27 Regular is loaded, so this is synthesised, as on the source. */
+  font-size: 1.75rem;
+  line-height: 1.1;
+  text-transform: uppercase;
+  color: var(--color-ink); /* --color-headline-maron */
+}
+
+@media (min-width: 48em) {
+  .block-1-1-hero__heading {
+    font-size: clamp(2.375rem, 3.4375vw, 4.125rem);
+    line-height: 1.2; /* --line-height-snug */
+  }
+}
+
+.block-1-1-hero__btn {
+  width: 100%;
+}
+
+@media (min-width: 48em) {
+  .block-1-1-hero__btn {
+    width: auto;
+  }
+}
+
+@media (max-width: 47.9375em) {
+  .block-1-1-hero__btn {
+    width: fit-content;
+    justify-content: flex-start;
+    padding-block: 0.9375rem; /* --space-figma-15 */
+  }
+
+  .block-1-1-hero__btn .btn__label {
+    text-align: left;
+    white-space: pre-line;
+  }
+}
