@@ -4,7 +4,10 @@ function App() {
   return (
     <>
       <Header />
-      <main id="main-content">{/* Sections are added incrementally, one at a time. */}</main>
+      {/* The header is fixed, so content starts below it. */}
+      <main id="main-content" className="relative w-full pt-(--header-height)">
+        {/* Sections are added incrementally, one at a time. */}
+      </main>
     </>
   )
 }

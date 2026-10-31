@@ -1,131 +1,116 @@
-import { useEffect, useRef } from 'react'
+import type { Ref } from 'react'
 
-import { gsap, useGSAP } from '@/lib/gsap'
+import { deadLinkProps } from '@/lib/preventNavigation'
 
-import { languages, mobileExtraLinks, primaryNav } from '@/data/navigation'
+import { announcement, languages, mobileExtraLinks, primaryNav } from '@/data/navigation'
 
 import Button from '@/components/ui/Button'
+import ChevronIcon from '@/components/ui/ChevronIcon'
 
-import MobileAccordion from './MobileAccordion'
+import MobileAccordion, { AccordionChevron } from './MobileAccordion'
 
 interface MobileMenuProps {
+  id: string
   isOpen: boolean
-  onClose: () => void
+  ref?: Ref<HTMLDivElement>
 }
 
-/** Full-height slide-in panel shown on small screens when the hamburger is tapped. */
-function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
-  const panelRef = useRef<HTMLDivElement>(null)
-  const timelineRef = useRef<gsap.core.Timeline | null>(null)
-  const [dnaTeam, ourProjects] = primaryNav
-
-  // Build the open/close timeline once; toggling it is just play()/reverse().
-  useGSAP(
-    () => {
-      const panel = panelRef.current
-      if (!panel) return
-
-      gsap.set(panel, { display: 'none', xPercent: 100 })
-
-      const tl = gsap.timeline({ paused: true })
-      tl.set(panel, { display: 'flex' })
-        .to(panel, { xPercent: 0, duration: 0.45, ease: 'power3.out' })
-        .fromTo(
-          panel.querySelectorAll('[data-menu-item]'),
-          { y: 16, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.35, stagger: 0.04, ease: 'power2.out' },
-          '-=0.2',
-        )
-
-      timelineRef.current = tl
-      return () => {
-        tl.kill()
-        timelineRef.current = null
-      }
-    },
-    { scope: panelRef },
-  )
-
-  useEffect(() => {
-    const tl = timelineRef.current
-    if (!tl) return
-
-    if (isOpen) {
-      document.body.style.overflow = 'hidden'
-      tl.play()
-    } else {
-      document.body.style.overflow = ''
-      tl.eventCallback('onReverseComplete', () => gsap.set(panelRef.current, { display: 'none' }))
-      tl.reverse()
-    }
-
-    return () => {
-      document.body.style.overflow = ''
-    }
-  }, [isOpen])
-
+/**
+ * Panel under the mobile bar (below 48em). Opening is a CSS fade + slide-down on
+ * `.header-ronn__menu.is-open`; the Header owns the open state, focus and scroll lock.
+ */
+function MobileMenu({ id, isOpen, ref }: MobileMenuProps) {
   return (
     <div
-      ref={panelRef}
-      className="bg-ink fixed inset-0 z-50 flex flex-col overflow-y-auto px-6 pt-6 pb-10 lg:hidden"
+      ref={ref}
+      id={id}
+      className={`header-ronn__menu ${isOpen ? 'is-open' : ''}`}
+      role="dialog"
+      aria-label="Navigation menu"
       aria-hidden={!isOpen}
+      inert={!isOpen}
+      tabIndex={-1}
     >
-      <div className="mb-8 flex items-center justify-end" data-menu-item>
-        <button
-          type="button"
-          onClick={onClose}
-          aria-label="Close menu"
-          className="text-cream flex h-10 w-10 items-center justify-center"
-        >
-          <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" aria-hidden="true">
-            <path
-              d="M5 5L19 19M19 5L5 19"
-              stroke="currentColor"
-              strokeWidth="1.6"
-              strokeLinecap="round"
-            />
-          </svg>
-        </button>
-      </div>
+      <div className="header-ronn__menu-body">
+        <Button
+          {...deadLinkProps}
+          label="Contact Us"
+          animateChars={false}
+          className="header-ronn__btn header-ronn__btn--solid header-ronn__btn--full header-ronn__btn--menu-top"
+        />
 
-      <div data-menu-item>
-        <Button label="Contact Us" variant="solid" fullWidth href="/contact" />
-      </div>
+        {primaryNav.map((item) =>
+          item.children ? (
+            <MobileAccordion
+              key={item.path}
+              renderRow={({ isOpen: isGroupOpen, onToggle }) => (
+                <div className="header-ronn__menu-link header-ronn__menu-link--parent">
+                  <a {...deadLinkProps} className="header-ronn__menu-parent-link">
+                    {item.label}
+                  </a>
+                  <AccordionChevron label={item.label} isOpen={isGroupOpen} onToggle={onToggle} />
+                </div>
+              )}
+            >
+              {item.children.map((child) => (
+                <a key={child.path} {...deadLinkProps} className="header-ronn__menu-sub-link">
+                  {child.label}
+                </a>
+              ))}
+            </MobileAccordion>
+          ) : (
+            <a key={item.path} {...deadLinkProps} className="header-ronn__menu-link">
+              {item.label}
+            </a>
+          ),
+        )}
 
-      <nav className="mt-6 flex flex-col">
-        <a
-          data-menu-item
-          href={dnaTeam.href}
-          className="border-cream/15 text-cream border-b py-4 font-serif text-xl"
-        >
-          {dnaTeam.label}
-        </a>
-        <a
-          data-menu-item
-          href={ourProjects.href}
-          className="border-cream/15 text-cream border-b py-4 font-serif text-xl"
-        >
-          {ourProjects.label}
-        </a>
-        {primaryNav.slice(2).map((item) => (
-          <div data-menu-item key={item.href}>
-            <MobileAccordion item={item} />
-          </div>
-        ))}
         {mobileExtraLinks.map((link) => (
-          <a
-            key={link.href}
-            data-menu-item
-            href={link.href}
-            className="border-cream/15 text-cream border-b py-4 font-serif text-xl"
-          >
+          <a key={link.path} {...deadLinkProps} className="header-ronn__menu-link">
             {link.label}
           </a>
         ))}
-        <div data-menu-item>
-          <MobileAccordion item={{ label: 'English', href: '#', children: languages }} />
+
+        <MobileAccordion
+          renderRow={({ isOpen: isGroupOpen, onToggle }) => (
+            <button
+              type="button"
+              className="header-ronn__menu-link header-ronn__menu-link--parent header-ronn__menu-link--lang"
+              aria-expanded={isGroupOpen}
+              onClick={onToggle}
+            >
+              <span>Language</span>
+              <span className="header-ronn__menu-lang-right">
+                <span>en</span>
+              </span>
+              <span className="header-ronn__chevron">
+                <ChevronIcon />
+              </span>
+            </button>
+          )}
+        >
+          {languages.map((lang) => (
+            <a
+              key={lang.code}
+              {...deadLinkProps}
+              className={`header-ronn__menu-sub-link ${lang.code === 'en' ? 'is-active' : ''}`}
+            >
+              {lang.label}
+            </a>
+          ))}
+        </MobileAccordion>
+      </div>
+
+      <div className="header-ronn__menu-footer">
+        <div className="header-ronn__menu-cta">
+          <p className="header-ronn__menu-cta-text">{announcement.text}</p>
+          <Button
+            {...deadLinkProps}
+            label={announcement.cta.label}
+            className="header-ronn__menu-cta-btn"
+          />
         </div>
-      </nav>
+      </div>
     </div>
   )
 }

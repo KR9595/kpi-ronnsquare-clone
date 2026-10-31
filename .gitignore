@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Third-party reference material (original site source), never committed
+.scratch/*/reference/

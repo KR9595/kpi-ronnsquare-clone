@@ -1,52 +1,60 @@
+/**
+ * Header navigation, copied from the source site's English menu. `path` is the page on the
+ * source site; this clone only has the homepage, so links render `href="#"` and don't navigate.
+ */
 export interface NavLink {
   label: string
-  href: string
+  path: string
 }
 
-export interface NavItem {
-  label: string
-  href: string
+export interface NavItem extends NavLink {
   children?: NavLink[]
 }
 
 export const primaryNav: NavItem[] = [
-  { label: 'DNA & Team', href: '/dna-team' },
-  { label: 'Our Projects', href: '/our-projects' },
+  { label: 'DNA & Team', path: '/en/dna-team/' },
+  { label: 'Our Projects', path: '/en/realisations/' },
   {
     label: 'Concerns',
-    href: '/concerns',
+    path: '/en/preoccupations/',
     children: [
-      { label: 'Lease Expiry', href: '/concerns/lease-expiry' },
-      { label: 'Complex Projects', href: '/concerns/complex-projects' },
+      { label: 'Lease Expiry', path: '/en/preoccupations/lease-expiry/' },
+      { label: 'Complex Projects', path: '/en/preoccupations/complex-projects/' },
       {
         label: 'Attracting and Retaining Talent',
-        href: '/concerns/attracting-and-retaining-talent',
+        path: '/en/preoccupations/attract-and-retain-talent/',
       },
       {
         label: 'Bringing Teams Back to the Office',
-        href: '/concerns/bringing-teams-back-to-the-office',
+        path: '/en/preoccupations/bring-teams-back/',
       },
     ],
   },
   {
     label: 'Our Expertise',
-    href: '/our-expertise',
+    path: '/en/expertises/',
     children: [
-      { label: 'Sustainability & Environment', href: '/our-expertise/sustainability-environment' },
-      { label: 'Technical Delivery', href: '/our-expertise/technical-delivery' },
-      { label: 'Consulting & Strategy', href: '/our-expertise/consulting-strategy' },
-      { label: 'Architecture & Design', href: '/our-expertise/architecture-design' },
+      { label: 'Sustainability & Environment', path: '/en/expertises/sustainability-ecology/' },
+      { label: 'Technical Delivery', path: '/en/expertises/technical-execution/' },
+      { label: 'Consulting & Strategy', path: '/en/expertises/consulting-strategy/' },
+      { label: 'Architecture & Design', path: '/en/expertises/architecture-design/' },
     ],
   },
 ]
 
+/** Extra rows the mobile menu shows before the language row (label copied as-is from the source). */
 export const mobileExtraLinks: NavLink[] = [
-  { label: 'FAQ', href: '/faq' },
-  { label: 'Client Testimonials', href: '/client-testimonials' },
-  { label: 'Contacts', href: '/contacts' },
+  { label: 'FAQ', path: '/en/faq/' },
+  { label: 'Témoignages clients', path: '/en/testimonials/' },
+  { label: 'Contacts', path: '/en/contact/' },
 ]
 
+/** English only: the clone keeps EN as the single language option. */
 export const languages: (NavLink & { code: string })[] = [
-  { code: 'en', label: 'English', href: '/en' },
-  { code: 'fr', label: 'Français', href: '/' },
+  { code: 'en', label: 'English', path: '/en/' },
 ]
+
+export const announcement = {
+  text: 'ADP Group becomes Ronnsquare!',
+  cta: { label: 'Discover', path: '/en/adn-equipe/' },
+}

@@ -1,22 +1,30 @@
 interface SplitCharsProps {
   text: string
-  className?: string
+  /** Seconds added per letter to each span's `transition-delay`, for a staggered CSS hover. */
+  stagger?: number
 }
 
 /**
- * Renders text as one <span> per character so GSAP can stagger them individually.
- * The split markup is hidden from assistive tech; pair it with a visible sr-only
- * label carrying the full string (see Button.tsx) so screen readers announce it once.
+ * Renders text as one inline <span> per character (no wrapper), so CSS can transition each
+ * letter with its own delay. Hidden from assistive tech; pair it with an sr-only copy of
+ * the text (see Button.tsx).
  */
-function SplitChars({ text, className }: SplitCharsProps) {
+function SplitChars({ text, stagger = 0 }: SplitCharsProps) {
   return (
-    <span aria-hidden="true" className="inline-block">
-      {text.split('').map((char, index) => (
-        <span key={`${char}-${index}`} data-char className={`inline-block ${className ?? ''}`}>
-          {char === ' ' ? ' ' : char}
+    <>
+      {[...text].map((char, index) => (
+        <span
+          key={`${char}-${index}`}
+          aria-hidden="true"
+          style={{
+            transitionDelay: `${index * stagger}s`,
+            whiteSpace: char === ' ' ? 'pre' : undefined,
+          }}
+        >
+          {char}
         </span>
       ))}
-    </span>
+    </>
   )
 }
 

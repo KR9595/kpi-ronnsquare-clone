@@ -1,95 +1,63 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
 
-import { gsap, useGSAP } from '@/lib/gsap'
+import { deadLinkProps } from '@/lib/preventNavigation'
 
 import type { NavItem } from '@/data/navigation'
 
+import ChevronIcon from '@/components/ui/ChevronIcon'
+
+/** Grace period before a dropdown closes after the pointer leaves, as on the source site. */
+export const DROPDOWN_CLOSE_DELAY = 150
+
 interface NavDropdownProps {
   item: NavItem
+  isOpen: boolean
+  onOpen: () => void
+  onClose: () => void
 }
 
-/** Desktop "Concerns" / "Our Expertise" nav item: hover or click reveals a dropdown panel. */
-function NavDropdown({ item }: NavDropdownProps) {
-  const [isOpen, setIsOpen] = useState(false)
-  const panelRef = useRef<HTMLUListElement>(null)
-  const chevronRef = useRef<SVGSVGElement>(null)
+/**
+ * Desktop "Concerns" / "Our Expertise" item. Hover opens it (closing the others), leaving
+ * closes it after a short delay, and the chevron toggles it. The panel's fade/slide is CSS
+ * (`.is-open > .header-ronn__dropdown` in header.css).
+ */
+function NavDropdown({ item, isOpen, onOpen, onClose }: NavDropdownProps) {
+  const closeTimer = useRef<number | undefined>(undefined)
 
-  useGSAP(() => {
-    const panel = panelRef.current
-    const chevron = chevronRef.current
-    if (!panel) return
+  const open = () => {
+    window.clearTimeout(closeTimer.current)
+    onOpen()
+  }
+  const scheduleClose = () => {
+    window.clearTimeout(closeTimer.current)
+    closeTimer.current = window.setTimeout(onClose, DROPDOWN_CLOSE_DELAY)
+  }
 
-    if (isOpen) {
-      gsap.set(panel, { display: 'block', height: 'auto' })
-      const fullHeight = panel.offsetHeight
-      gsap.fromTo(
-        panel,
-        { height: 0, opacity: 0 },
-        { height: fullHeight, opacity: 1, duration: 0.35, ease: 'power3.out' },
-      )
-      gsap.fromTo(
-        panel.children,
-        { y: -8, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.3, stagger: 0.04, delay: 0.05, ease: 'power2.out' },
-      )
-      if (chevron) gsap.to(chevron, { rotate: 180, duration: 0.3, ease: 'power2.out' })
-    } else {
-      gsap.to(panel, {
-        height: 0,
-        opacity: 0,
-        duration: 0.25,
-        ease: 'power2.in',
-        onComplete: () => gsap.set(panel, { display: 'none' }),
-      })
-      if (chevron) gsap.to(chevron, { rotate: 0, duration: 0.3, ease: 'power2.out' })
-    }
-  }, [isOpen])
+  useEffect(() => () => window.clearTimeout(closeTimer.current), [])
 
   return (
     <li
-      className="group relative"
-      onMouseEnter={() => setIsOpen(true)}
-      onMouseLeave={() => setIsOpen(false)}
+      className={`header-ronn__nav-item header-ronn__nav-item--has-sub ${isOpen ? 'is-open' : ''}`}
+      onMouseEnter={open}
+      onMouseLeave={scheduleClose}
     >
-      <div className="flex items-center gap-1.5">
-        <a href={item.href} className="text-ink font-serif text-sm">
-          {item.label}
-        </a>
-        <button
-          type="button"
-          aria-expanded={isOpen}
-          aria-label={`Toggle ${item.label} submenu`}
-          onClick={() => setIsOpen((prev) => !prev)}
-          className="flex h-4 w-4 items-center justify-center"
-        >
-          <svg
-            ref={chevronRef}
-            viewBox="0 0 12 8"
-            className="h-2.5 w-2.5"
-            fill="none"
-            aria-hidden="true"
-          >
-            <path
-              d="M1 1.5L6 6.5L11 1.5"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        </button>
-      </div>
-
-      <ul
-        ref={panelRef}
-        className="bg-cream absolute top-full left-1/2 z-40 mt-3 hidden w-64 -translate-x-1/2 overflow-hidden rounded-sm shadow-[0_12px_32px_rgba(35,24,0,0.16)]"
+      <a {...deadLinkProps} className="header-ronn__nav-link">
+        {item.label}
+      </a>
+      <button
+        type="button"
+        className="header-ronn__chevron-toggle"
+        aria-expanded={isOpen}
+        aria-haspopup="true"
+        aria-label={`Open submenu ${item.label}`}
+        onClick={() => (isOpen ? onClose() : open())}
       >
+        <ChevronIcon />
+      </button>
+      <ul className="header-ronn__dropdown" role="menu">
         {item.children?.map((child) => (
-          <li key={child.href}>
-            <a
-              href={child.href}
-              className="border-ink/10 text-ink hover:bg-ink/5 block border-b px-5 py-3 font-serif text-sm last:border-none"
-            >
+          <li key={child.path} role="none">
+            <a {...deadLinkProps} className="header-ronn__dropdown-link" role="menuitem">
               {child.label}
             </a>
           </li>

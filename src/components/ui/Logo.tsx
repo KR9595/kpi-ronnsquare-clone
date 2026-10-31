@@ -1,55 +1,99 @@
 interface LogoProps {
   className?: string
+  /**
+   * The header uses the tight box. The intro's `brand-clone` uses `0 -18 116.408 80`, which
+   * leaves room above/below for the shapes to move without being clipped.
+   */
+  viewBox?: string
 }
 
+type LogoPath =
+  | { wm: 'letter'; glyph: string; d: string }
+  | { wm: 'shape'; shape: 'circle' | 'diamond' | 'triangle'; d: string }
+
 /**
- * Two-line "RONN / SQUARE" wordmark with a small geometric cluster (diamond,
- * circle, triangle) echoing the source site's shape motif. Uses `currentColor`
- * so the header can flip it between the cream/dark theme variants.
+ * Ronnsquare wordmark, copied from the source site's markup. Paths keep the original
+ * `data-wm` / `data-glyph` / `data-shape` hooks so the intro animation can target each
+ * letter and shape. Fills use `currentColor`, so the parent sets the color.
  */
-function Logo({ className = '' }: LogoProps) {
+const LOGO_PATHS: LogoPath[] = [
+  {
+    wm: 'letter',
+    glyph: 's',
+    d: 'M9.95438 32.2447L7.06265 31.6228C4.50739 31.077 4.15426 30.1291 4.15426 29.1863C4.15426 26.929 6.4991 26.5915 7.89704 26.5915C10.4346 26.5915 11.894 27.6842 12.0065 29.6676L12.0346 30.1551H15.7524L15.7483 29.6343C15.716 25.8685 12.5128 23.2383 7.9585 23.2383C5.70637 23.2383 3.80216 23.8008 2.45422 24.8664C1.09898 25.9373 0.3823 27.4311 0.3823 29.1863C0.3823 32.3041 2.31359 34.2739 6.12305 35.0396L9.22936 35.6625C11.4763 36.1021 12.3117 36.8386 12.3117 38.3803C12.3117 40.2897 11.1502 41.2585 8.24184 41.2585C5.33345 41.2585 3.85008 40.1084 3.70633 37.8386L3.67612 37.3542H0L0.0177087 37.8876C0.0843768 39.9324 0.782308 41.6189 2.13338 42.7627C3.55945 43.97 5.6147 44.5825 8.2408 44.5825C13.2128 44.5825 16.1128 42.1481 16.1128 38.3803C16.1128 34.0791 12.5982 32.8197 9.95334 32.2458L9.95438 32.2447Z',
+  },
+  {
+    wm: 'letter',
+    glyph: 'r1',
+    d: 'M3.77482 15.5488L11.8187 21.6624H17.9564L5.69049 12.5674H8.74368C10.9073 12.5674 12.6136 12.0779 13.8157 11.1132C15.1094 10.0736 15.7657 8.53715 15.7657 6.5444C15.7657 2.91724 13.075 0.664062 8.74368 0.664062H0.0351562V21.6624H3.77586V15.5488H3.77482ZM3.77482 3.98601H8.59055C11.5542 3.98601 11.9333 5.36833 11.9333 6.57252C11.9333 8.4059 10.9333 9.1882 8.59055 9.1882H3.77482V3.98601Z',
+  },
+  {
+    wm: 'letter',
+    glyph: 'u',
+    d: 'M55.2703 36.7478C55.2703 39.7541 53.713 41.2156 50.5098 41.2156C47.3066 41.2156 45.8118 39.7541 45.8118 36.7478V23.2559H41.9492V36.8051C41.9492 39.2177 42.7305 41.2083 44.2076 42.5604C45.7035 43.9292 47.8243 44.624 50.5098 44.624C53.1953 44.624 55.3776 43.9303 56.8777 42.5615C58.3527 41.2146 59.1329 39.225 59.1329 36.8051V23.2559H55.2703V36.7478Z',
+  },
+  {
+    wm: 'letter',
+    glyph: 'a',
+    d: 'M67.6752 23.2656L60.6407 44.264H64.7189L66.3752 39.1035H74.6316L76.2879 44.264H80.364L73.3941 23.2656H67.6752ZM67.4439 35.7815L70.5023 26.2105L73.5607 35.7815H67.4429H67.4439Z',
+  },
+  {
+    wm: 'letter',
+    glyph: 'r2',
+    d: 'M91.6734 35.169C93.8369 35.169 95.5432 34.6794 96.7453 33.7148C98.0391 32.6752 98.6954 31.1387 98.6954 29.146C98.6954 25.5188 96.0047 23.2656 91.6734 23.2656H82.9648V44.264H86.7055V38.1503L94.7495 44.264H100.887L88.6202 35.17H91.6734V35.169ZM86.7045 26.5876H91.5202C94.4838 26.5876 94.863 27.9699 94.863 29.1741C94.863 31.0075 93.863 31.7887 91.5202 31.7887H86.7045V26.5865V26.5876Z',
+  },
+  {
+    wm: 'letter',
+    glyph: 'e',
+    d: 'M116.408 26.6449V23.2656H102.18V44.264H116.408V40.8837H105.981V35.1409H115.457V31.7617H105.981V26.6449H116.408Z',
+  },
+  {
+    wm: 'letter',
+    glyph: 'n1',
+    d: 'M45.7121 4.46935L52.933 21.6624H59.1311V0.664062H55.4112V18.0342L48.0059 0.664062H41.9922V21.6624H45.7121V4.46935Z',
+  },
+  {
+    wm: 'letter',
+    glyph: 'n2',
+    d: 'M66.436 4.46935L73.6966 21.6624H79.929V0.664062H76.1894V18.0342L68.7423 0.664062H62.6953V21.6624H66.436V4.46935Z',
+  },
+  {
+    wm: 'shape',
+    shape: 'circle',
+    d: 'M28.589 44.5921C22.6702 44.5921 17.8555 39.7775 17.8555 33.8586C17.8555 27.9397 22.6702 23.125 28.589 23.125C34.5079 23.125 39.3226 27.9397 39.3226 33.8586C39.3226 39.7775 34.5079 44.5921 28.589 44.5921ZM28.589 40.9296C32.4881 40.9296 35.66 37.7576 35.66 33.8586C35.66 29.9595 32.4881 26.7876 28.589 26.7876C24.69 26.7876 21.518 29.9595 21.518 33.8586C21.518 37.7576 24.69 40.9296 28.589 40.9296Z',
+  },
+  {
+    wm: 'shape',
+    shape: 'diamond',
+    d: 'M28.5878 17.8764L34.8921 11.5721L28.5878 5.26782L22.2834 11.5721L28.5878 17.8764ZM28.5878 23.1442L17.0156 11.5721L28.5878 0L40.1599 11.5721L28.5878 23.1442Z',
+  },
+  { wm: 'shape', shape: 'triangle', d: 'M34.0054 50.0008L28.5887 44.584L23.1719 50.0008H34.0054Z' },
+]
+
+export const LOGO_VIEWBOX = '0 0 116.408 50.0008'
+export const LOGO_CLONE_VIEWBOX = '0 -18 116.408 80'
+
+function Logo({ className, viewBox = LOGO_VIEWBOX }: LogoProps) {
   return (
     <svg
-      viewBox="0 0 190 84"
-      className={className}
+      width="116"
+      height="50"
+      viewBox={viewBox}
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      className={className}
       aria-hidden="true"
+      focusable="false"
     >
-      <rect
-        x="14.5"
-        y="6"
-        width="18"
-        height="18"
-        rx="1"
-        transform="rotate(45 14.5 6)"
-        stroke="currentColor"
-        strokeWidth="2.4"
-      />
-      <text
-        x="34"
-        y="30"
-        fontFamily="'Space Grotesk', sans-serif"
-        fontWeight="700"
-        fontSize="30"
-        letterSpacing="-0.5"
-        fill="currentColor"
-      >
-        RONN
-      </text>
-      <circle cx="10" cy="60" r="9" stroke="currentColor" strokeWidth="2.4" />
-      <path d="M10 73 L15.5 82 H4.5 Z" fill="currentColor" />
-      <text
-        x="0"
-        y="82"
-        fontFamily="'Space Grotesk', sans-serif"
-        fontWeight="700"
-        fontSize="30"
-        letterSpacing="-0.5"
-        fill="currentColor"
-      >
-        <tspan x="26">SQUARE</tspan>
-      </text>
+      <g fill="currentColor">
+        {LOGO_PATHS.map((path) =>
+          path.wm === 'letter' ? (
+            <path key={path.glyph} data-wm="letter" data-glyph={path.glyph} d={path.d} />
+          ) : (
+            <path key={path.shape} data-wm="shape" data-shape={path.shape} d={path.d} />
+          ),
+        )}
+      </g>
     </svg>
   )
 }

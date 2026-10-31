@@ -1,29 +1,239 @@
 @import 'tailwindcss';
 
+/* Original site fonts (local learning use only, see README). */
+@font-face {
+  font-family: 'N27';
+  src: url('/fonts/N27-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gambetta';
+  src: url('/fonts/Gambetta-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gambetta';
+  src: url('/fonts/Gambetta-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gambetta';
+  src: url('/fonts/Gambetta-Semibold.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
 @theme {
-  --font-sans: 'Space Grotesk', system-ui, sans-serif;
-  --font-serif: 'Fraunces', Georgia, serif;
+  /* N27: uppercase headings, buttons, numerics. Gambetta: body text, nav, links. */
+  --font-primary: 'N27', system-ui, sans-serif;
+  --font-secondary: 'Gambetta', Georgia, serif;
+  --default-font-family: var(--font-secondary);
 
   --color-cream: #ffead4;
   --color-ink: #231800;
   --color-lilac: #dbb6fc;
   --color-black: #000000;
-
-  --breakpoint-xs: 30rem;
 }
 
+:root {
+  --color-focus-ring: var(--color-lilac);
+
+  /* Fixed header: 70px bar, plus the 50px announcement bar from 48em up. */
+  --header-bar-height: 4.375rem;
+  --header-cta-height: 3.125rem;
+  --header-height: var(--header-bar-height);
+
+  /* Button tokens (`.btn`, see @layer components below), same values as the source site. */
+  --btn-font: var(--font-primary);
+  --btn-weight: 400;
+  --btn-transform: uppercase;
+  --btn-letter-spacing: 0;
+  --btn-radius: 0;
+  --btn-duration: 0.4s;
+  --btn-ease: ease;
+  --btn-bg: var(--color-ink);
+  --btn-label: var(--color-cream);
+  --btn-bg-hover: var(--color-lilac);
+  --btn-label-hover: var(--color-ink);
+  --btn-border: transparent;
+  --btn-height: 3.75rem;
+  --btn-font-size: 1.5rem;
+  --btn-pad-x: 1.875rem;
+}
+
+@media (min-width: 48em) {
+  :root {
+    --header-height: calc(var(--header-bar-height) + var(--header-cta-height));
+  }
+}
+
+/* Desktop/mobile layouts switch at Tailwind's `md` (48rem = 768px), same as the source site. */
 html {
+  font-size: 16px;
   scroll-behavior: smooth;
 }
 
+/* The source site bumps the root size on phones, so every rem grows by 1/16. */
+@media (max-width: 47.9375em) {
+  html {
+    font-size: 17px;
+  }
+}
+
 body {
+  min-height: 100svh;
+  overflow-x: hidden;
   background-color: var(--color-cream);
   color: var(--color-ink);
-  font-family: var(--font-serif);
+  font-family: var(--font-secondary);
+  font-size: 1rem;
+  line-height: 1.3;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 ::selection {
-  background-color: var(--color-lilac);
-  color: var(--color-ink);
+  background-color: var(--color-ink);
+  color: #ffffff;
+}
+
+@media (hover: hover) {
+  :focus-visible {
+    outline: 2px solid var(--color-focus-ring);
+    outline-offset: 2px;
+  }
+}
+
+/* Lenis (https://github.com/darkroomengineering/lenis/blob/main/packages/core/lenis.css) */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: clip;
+}
+
+/* Lock page scroll while the mobile menu is open. */
+.is-header-menu-open {
+  overflow: hidden;
+}
+
+@layer components {
+  /*
+   * Button: a fill layer (`.btn__bg`) under a label whose letters are split into spans
+   * (desktop only, see Button.tsx). Each letter carries a copy of itself 1.3em below via
+   * text-shadow; on hover the letters slide up one line with a per-letter delay.
+   */
+  .btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    height: var(--btn-height);
+    padding: 0 var(--btn-pad-x);
+    font-family: var(--btn-font);
+    font-weight: var(--btn-weight);
+    font-size: var(--btn-font-size);
+    letter-spacing: var(--btn-letter-spacing);
+    line-height: 1;
+    text-transform: var(--btn-transform);
+    text-decoration: none;
+    white-space: nowrap;
+    color: var(--btn-label);
+    background: transparent;
+    border: 1px solid var(--btn-border);
+    border-radius: var(--btn-radius);
+    cursor: pointer;
+    transition:
+      color var(--btn-duration) var(--btn-ease),
+      border-color var(--btn-duration) var(--btn-ease);
+  }
+
+  .btn__bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background-color: var(--btn-bg);
+    border-radius: var(--btn-radius);
+  }
+
+  .btn__bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: var(--btn-bg-hover);
+    border-radius: inherit;
+    opacity: 0;
+    transition: opacity var(--btn-duration) var(--btn-ease);
+  }
+
+  .btn__label {
+    position: relative;
+    z-index: 1;
+    display: inline-flex;
+    overflow: hidden;
+    white-space: nowrap;
+    line-height: 1.3;
+  }
+
+  .btn__label span {
+    display: inline-block;
+    position: relative;
+    text-shadow: 0 1.3em currentColor;
+    transform: translateY(0) rotate(0.001deg);
+    transition: transform 0.6s cubic-bezier(0.625, 0.05, 0, 1);
+  }
+
+  .btn:hover {
+    color: var(--btn-label-hover);
+  }
+
+  .btn:hover .btn__bg::after {
+    opacity: 1;
+  }
+
+  .btn:hover .btn__label span {
+    transform: translateY(-1.3em) rotate(0.001deg);
+  }
+
+  .btn--full {
+    width: 100%;
+  }
+
+  @media (max-width: 47.9375em) {
+    .btn {
+      height: auto;
+      min-height: var(--btn-height);
+      justify-content: center;
+      white-space: normal;
+    }
+
+    .btn__label {
+      display: inline-block;
+      overflow: visible;
+      white-space: normal;
+      text-align: center;
+    }
+  }
 }
