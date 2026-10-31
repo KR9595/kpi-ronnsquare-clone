@@ -68,7 +68,9 @@ public/
       swipe and tap below; entrances; checked at 1440×900, 1024×768 and 375×812)
 - [x] "Client Testimonials" slider (crossfading quote + image, arrows, dots, arrow keys,
       autoplay, swipe below 992px; entrance; checked at 1440×900, 1024×768 and 375×812)
-- [ ] Remaining homepage sections
+- [x] "Do you have a workplace design project?" call to action (parallax photo, card
+      entrance) and FAQ accordion (one answer open at a time, looping illustration); checked
+      at 1440×900, 1024×768 and 375×812
 - [ ] Footer
 
 ## Notes
@@ -136,6 +138,16 @@ public/
   crossfades the quote and its image (0.35s out, the next one in 0.2s later); the arrows,
   dots, ←/→ and, below 992px, a swipe on the slider change testimonial. It advances every 6s
   while on screen and pauses for 5s after any manual change.
+- Call to action (`src/components/sections/Cta/`) ports block-1-10-cta-anim.js: at `top 75%`
+  the card fades in, the title's lines slide up, then the body and "Free Audit" fade up; the
+  photo runs the global parallax (-15% → 15%). "Free Audit" links to the contact page, so it
+  goes nowhere here.
+- FAQ (`src/components/sections/Faq/`) ports block-1-11-faq-anim.js: one answer open at a
+  time (the first on load, clicking the open question closes it), height and plus/minus
+  tweens, `aria-expanded` on each question, and a list min-height that reserves the tallest
+  answer so toggling never moves the page. The illustration's loop (`src/lib/faqLoop.ts`,
+  from faq-loop.js: After Effects keyframes with their cubic-bezier eases) plays only while
+  the block is on screen.
 - Homepage intro: a port of the source's entrance (`src/lib/intro/`, mirroring its
   `entrances/home.js`, `brand-clone.js`, `wordmark-reveal.js` and `preloader-data.js`; markup
   in `src/components/intro/` plus the static `#site-loader` and session gate in `index.html`).

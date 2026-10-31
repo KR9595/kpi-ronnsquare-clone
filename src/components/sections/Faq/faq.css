@@ -1,0 +1,210 @@
+/*
+ * "FAQ" accordion, ported from the source site's `.block-1-11-faq` block (same class names
+ * and breakpoints; only the sable illustration variant the homepage uses is kept). Source
+ * tokens are resolved inline and named in comments.
+ */
+
+.block-1-11-faq {
+  position: relative;
+  padding: 2.5rem 0.625rem; /* --space-figma-40, --page-edge */
+  background: #231800; /* --color-brand-maron */
+  overflow: hidden;
+}
+
+@media (min-width: 48em) {
+  .block-1-11-faq {
+    padding: clamp(7.5rem, 10.4166666667vw, 12.5rem) clamp(2.25rem, 3.125vw, 3.75rem);
+  }
+}
+
+.block-1-11-faq__container {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  max-width: 90rem; /* --container-max */
+  margin: 0 auto;
+}
+
+@media (min-width: 48em) {
+  .block-1-11-faq__container {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: clamp(2.25rem, 3.125vw, 3.75rem);
+  }
+}
+
+.block-1-11-faq__left {
+  position: relative;
+  padding-bottom: 1.875rem;
+}
+
+@media (min-width: 48em) {
+  .block-1-11-faq__left {
+    padding-bottom: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem; /* --space-figma-40 */
+    flex: 0 0 40%;
+  }
+}
+
+.block-1-11-faq__title {
+  font-family: var(--font-primary);
+  font-weight: 700; /* --font-weight-bold */
+  font-size: 1.75rem; /* --font-size-h2-mobile */
+  line-height: 1.1;
+  text-transform: uppercase;
+  color: #ffead4; /* --color-brand-sable */
+}
+
+@media (min-width: 48em) {
+  .block-1-11-faq__title {
+    font-size: clamp(4.5rem, 6.25vw, 7.5rem); /* --font-size-h1-fluid */
+    line-height: 1.2; /* --line-height-snug */
+  }
+}
+
+.block-1-11-faq__illustration {
+  color: #ffead4; /* --color-brand-sable */
+  width: clamp(6rem, 33vw, 9.375rem);
+  margin-inline: auto;
+  margin-top: 1.25rem;
+}
+
+@media (min-width: 48em) {
+  .block-1-11-faq__illustration {
+    width: auto;
+    max-width: clamp(12.75rem, 17.7083333333vw, 21.25rem);
+    margin-inline: 0;
+    margin-top: 0;
+  }
+}
+
+.block-1-11-faq__illustration svg {
+  width: 100%;
+  height: auto;
+}
+
+.block-1-11-faq__illustration--sable {
+  color: #ffead4; /* --color-brand-sable */
+  --faq-mark-color: #231800; /* --color-brand-maron */
+}
+
+.block-1-11-faq__list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  width: 100%;
+}
+
+@media (min-width: 48em) {
+  .block-1-11-faq__list {
+    flex: 1;
+  }
+}
+
+.block-1-11-faq__item {
+  background: #ffead4; /* --color-brand-sable */
+  overflow: hidden;
+}
+
+.block-1-11-faq__question {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.625rem;
+  width: 100%;
+  padding: 1.25rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-family: var(--font-secondary);
+  font-weight: 600; /* --font-weight-semibold */
+  font-size: 1rem;
+  line-height: 1.2; /* --line-height-snug */
+  color: #231800; /* --color-brand-maron */
+}
+
+@media (min-width: 48em) {
+  .block-1-11-faq__question {
+    gap: 1.25rem;
+    font-size: 1.5rem;
+  }
+}
+
+.block-1-11-faq__question:focus-visible {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 2px;
+  border-radius: inherit;
+}
+
+.block-1-11-faq__question-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.block-1-11-faq__icon {
+  position: relative;
+  flex-shrink: 0;
+  width: 1.875rem;
+  height: 1.875rem;
+  color: #231800; /* --color-brand-maron */
+}
+
+@media (min-width: 48em) {
+  .block-1-11-faq__icon {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+}
+
+.block-1-11-faq__icon svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0.4375rem;
+}
+
+@media (min-width: 48em) {
+  .block-1-11-faq__icon svg {
+    padding: 0.625rem;
+  }
+}
+
+.block-1-11-faq__icon-plus {
+  opacity: 1;
+}
+
+.block-1-11-faq__icon-minus {
+  opacity: 0;
+}
+
+.block-1-11-faq__answer {
+  height: 0;
+  overflow: hidden;
+  opacity: 0;
+}
+
+.block-1-11-faq__answer-inner {
+  padding: 0 1.25rem 1.25rem;
+}
+
+@media (min-width: 48em) {
+  .block-1-11-faq__answer-inner {
+    max-width: 43.75rem;
+  }
+}
+
+.block-1-11-faq__answer-inner p {
+  font-family: var(--font-secondary);
+  font-weight: 500; /* --font-weight-medium */
+  font-size: 1rem; /* --font-size-base */
+  line-height: 1.4; /* --line-height-relaxed */
+  color: #231800; /* --color-brand-maron */
+}
+
+.block-1-11-faq__answer-inner p + p {
+  margin-top: 0.9375rem; /* --space-figma-15 */
+}
