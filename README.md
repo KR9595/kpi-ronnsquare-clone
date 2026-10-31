@@ -62,6 +62,8 @@ public/
       at 1440×900, 1024×768 and 375×812
 - [x] Advantages (two columns around the swaying totem; from 1024px up it chains off the
       triangle wipe; checked at 1440×900, 1024×768 and 375×812)
+- [x] "Ronnsquare is" key figures and "Our Support" services list (card images with
+      parallax, flipping totem with its tipping exit; checked at 1440×900, 1024×768 and 375×812)
 - [ ] Remaining homepage sections
 - [ ] Footer
 
@@ -105,6 +107,18 @@ public/
   entrance plays at `top 20%`. Below 1024px the entrance plays at `top 75%` and the background
   steps from sable to parme (0.8s) when the block reaches the top. The totem's idle sway is
   `src/lib/totemSway.ts` (the source's totem-sway.js).
+- "Ronnsquare is" (`src/components/sections/Theses/`) ports block-1-7-theses-anim.js (title
+  split reveal, figures fade up, `top 75%`). "Our Support" (`src/components/sections/Services/`)
+  ports block-1-7-services-anim.js and its lazily loaded block-1-7-services-totem.js
+  (`src/lib/servicesTotem.ts`, keyframes in `servicesTotemData.ts` from the source's
+  accompagnement-data.js): one clone of the totem per card, clipped to it and coloured with
+  the card's text colour, travels down the list and flips half a turn over each card edge,
+  scrubbed over the list (`top top` → `bottom bottom`); the shapes assemble as the first card
+  scrolls up. Once the last card is on screen, `src/lib/servicesExitDestroy.ts` (the source's
+  services-exit-destroy.js, `arranged` mode) bakes a Matter.js tip-over and scrubs it while
+  the block's bottom goes from 95% to 55%. `?slinky=0` turns off the per-shape lag, as on the
+  source. Card images use the source's global `data-parallax` attributes
+  (`src/lib/parallax.ts`).
 - Homepage intro: a port of the source's entrance (`src/lib/intro/`, mirroring its
   `entrances/home.js`, `brand-clone.js`, `wordmark-reveal.js` and `preloader-data.js`; markup
   in `src/components/intro/` plus the static `#site-loader` and session gate in `index.html`).

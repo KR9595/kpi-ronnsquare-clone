@@ -1,0 +1,336 @@
+/*
+ * "Our Support" services list with its totem, ported from the source site's
+ * `.block-1-7-services` block in its `--list` + `--totem` variants (same class names and
+ * breakpoints; the pinned/stacking rules of the other variants are left out). Source tokens
+ * are resolved inline and named in comments.
+ */
+
+.block-1-7-services {
+  position: relative;
+  z-index: 3;
+  padding: 2.5rem 0; /* --space-figma-40 */
+  margin: 0;
+  width: 100%;
+  background-color: #ffead4; /* --color-brand-sable */
+}
+
+@media (min-width: 48em) {
+  .block-1-7-services {
+    padding: clamp(7.5rem, 10.417vw, 12.5rem) 0; /* --space-figma-200-fluid */
+  }
+}
+
+.block-1-7-services__header {
+  padding: 0 1.25rem 1.875rem; /* --space-figma-20, --space-figma-30 */
+}
+
+@media (min-width: 48em) {
+  .block-1-7-services__header {
+    /* --container-padding, --space-figma-40-fluid */
+    padding: 0 5rem clamp(1.5rem, 2.083vw, 2.5rem);
+  }
+}
+
+.block-1-7-services__title {
+  font-family: var(--font-primary);
+  font-size: 1.75rem; /* --font-size-h2-mobile */
+  font-weight: 700; /* Synthesised from N27 Regular, as on the source. */
+  line-height: 1.1;
+  letter-spacing: -0.0625rem; /* --letter-spacing-tight */
+  color: #231800; /* --color-headline-maron */
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+
+@media (min-width: 48em) {
+  .block-1-7-services__title {
+    font-size: clamp(4.5rem, 6.25vw, 7.5rem);
+    line-height: 1.05;
+    text-align: center;
+  }
+}
+
+/* `--list`: the cards follow each other instead of stacking in a pinned viewport. */
+.block-1-7-services__pinned {
+  position: relative;
+  display: block;
+}
+
+.block-1-7-services__list {
+  position: relative;
+}
+
+/* Card colours: text (`--_card-color`, also the totem band's colour) and button. */
+.block-1-7-services__card:nth-child(1) {
+  --_card-color: #dbb6fc; /* --color-brand-parme */
+  --btn-bg: #dbb6fc;
+  --btn-label: #231800;
+  --btn-bg-hover: #dbb6fc;
+  --btn-label-hover: #231800;
+}
+
+.block-1-7-services__card:nth-child(2) {
+  --_card-color: #231800; /* --color-brand-maron */
+  --btn-bg: #231800;
+  --btn-label: #dbb6fc;
+  --btn-bg-hover: #231800;
+  --btn-label-hover: #dbb6fc;
+}
+
+.block-1-7-services__card:nth-child(3) {
+  --_card-color: #ffead4; /* --color-brand-sable */
+  --btn-bg: #ffead4;
+  --btn-label: #231800;
+  --btn-bg-hover: #ffead4;
+  --btn-label-hover: #231800;
+}
+
+.block-1-7-services__card:nth-child(4) {
+  --_card-color: #231800; /* --color-brand-maron */
+  --btn-bg: #231800;
+  --btn-label: #ffead4;
+  --btn-bg-hover: #231800;
+  --btn-label-hover: #ffead4;
+}
+
+.block-1-7-services__card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding: 1.25rem; /* --space-figma-20 */
+  gap: 1.25rem;
+}
+
+@media (min-width: 48em) {
+  .block-1-7-services__card {
+    flex-direction: row;
+    padding: clamp(2.25rem, 3.125vw, 3.75rem); /* --space-figma-60-fluid */
+    align-items: center;
+  }
+}
+
+.block-1-7-services__card--dark {
+  background-color: #231800; /* --color-bg-dark */
+}
+
+.block-1-7-services__card--parme {
+  background-color: #dbb6fc; /* --color-bg-accent */
+}
+
+.block-1-7-services__card--sable {
+  background-color: #ffead4; /* --color-brand-sable */
+}
+
+.block-1-7-services__btn {
+  width: 100%;
+  max-width: 17.5625rem;
+}
+
+@media (min-width: 48em) {
+  .block-1-7-services__btn {
+    width: auto;
+    max-width: 100%;
+    align-self: flex-start;
+  }
+}
+
+.block-1-7-services__btn .btn__label {
+  display: block;
+  max-width: 100%;
+  text-overflow: ellipsis;
+}
+
+.block-1-7-services__card-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 1.25rem; /* --space-figma-20 */
+  min-width: 0;
+}
+
+@media (min-width: 48em) {
+  .block-1-7-services__card-content {
+    flex: 0 0 clamp(21.9375rem, 30.46875vw, 36.5625rem);
+    gap: 1.875rem; /* --space-figma-30 */
+    min-height: clamp(24.375rem, 33.8541666667vw, 40.625rem);
+  }
+}
+
+.block-1-7-services__card-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem; /* --space-figma-20 */
+}
+
+.block-1-7-services__card-top {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.25rem; /* --space-figma-20 */
+}
+
+@media (min-width: 48em) {
+  .block-1-7-services__card-top {
+    flex-direction: column;
+  }
+}
+
+.block-1-7-services__card-title {
+  font-family: var(--font-primary);
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.035rem; /* --letter-spacing-tight-sm */
+  text-transform: uppercase;
+  color: var(--_card-color);
+  max-width: 15.625rem;
+}
+
+@media (min-width: 48em) {
+  .block-1-7-services__card-title {
+    font-size: clamp(1.2rem, 1.6666666667vw, 2rem);
+    line-height: 1;
+    max-width: clamp(12rem, 16.6666666667vw, 20rem);
+  }
+}
+
+.block-1-7-services__card-description {
+  font-family: var(--font-secondary);
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.4; /* --line-height-relaxed */
+  letter-spacing: 0.02rem; /* --letter-spacing-body */
+  color: var(--_card-color);
+  max-width: 17.5625rem;
+}
+
+@media (min-width: 48em) {
+  .block-1-7-services__card-description {
+    font-size: 1rem;
+    max-width: clamp(14.625rem, 20.3125vw, 24.375rem);
+  }
+}
+
+.block-1-7-services__card-images {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.9375rem; /* --space-figma-15 */
+  min-width: 0;
+  order: -1;
+}
+
+@media (min-width: 48em) {
+  .block-1-7-services__card-images {
+    flex: 1;
+    order: 0;
+    align-self: stretch;
+  }
+}
+
+.block-1-7-services__card-img {
+  overflow: hidden;
+  position: relative;
+  height: 15rem;
+}
+
+@media (min-width: 48em) {
+  .block-1-7-services__card-img {
+    height: clamp(24.375rem, 33.8541666667vw, 40.625rem);
+  }
+}
+
+.block-1-7-services__card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Taller than its frame, so the parallax (-10% → 10%) never shows an edge. */
+.block-1-7-services__card-img-inner {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -20%;
+  bottom: -20%;
+  will-change: transform;
+}
+
+/* --------------------------------------------------------------------------- totem */
+
+.block-1-7-services--totem {
+  overflow-x: clip;
+}
+
+@media (min-width: 48em) {
+  .block-1-7-services--totem {
+    overflow-x: visible;
+  }
+}
+
+/* The last card leaves room under its text for the totem's exit. */
+.block-1-7-services--totem .block-1-7-services__card:has(+ .block-1-7-services__totem) {
+  padding-bottom: 7.5rem;
+}
+
+@media (min-width: 48em) {
+  .block-1-7-services--totem .block-1-7-services__card:has(+ .block-1-7-services__totem) {
+    padding-bottom: clamp(2.25rem, 3.125vw, 3.75rem); /* --space-figma-60-fluid */
+  }
+}
+
+.block-1-7-services--totem .block-1-7-services__totem {
+  display: block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0.75rem;
+  width: 3.75rem;
+  z-index: 5;
+  pointer-events: none;
+  color: #dbb6fc; /* --color-brand-parme */
+}
+
+@media (min-width: 48em) {
+  .block-1-7-services--totem .block-1-7-services__totem {
+    right: auto;
+    /* --space-figma-60-fluid + the description's max width */
+    left: calc(clamp(2.25rem, 3.125vw, 3.75rem) + clamp(14.625rem, 20.3125vw, 24.375rem));
+    width: clamp(5.625rem, 7.8125vw, 9.375rem);
+  }
+}
+
+/* One band per card, clipped to it (set by servicesTotem.ts). */
+.block-1-7-services--totem .block-1-7-services__totem-band {
+  position: absolute;
+  inset: 0;
+}
+
+.block-1-7-services--totem .block-1-7-services__totem-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  will-change: transform;
+}
+
+.block-1-7-services--totem .block-1-7-services__totem-shape {
+  width: 100%;
+  line-height: 0;
+}
+
+.block-1-7-services--totem .block-1-7-services__totem-shape svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.block-1-7-services--totem .block-1-7-services__totem-shape[data-totem-shape='circle'] {
+  width: 92%;
+  margin-top: clamp(-0.0375rem, -0.0520833333vw, -0.0625rem);
+}
+
+.block-1-7-services--totem .block-1-7-services__totem-shape[data-totem-shape='triangle'] {
+  width: 46%;
+  margin-top: clamp(-0.0375rem, -0.0520833333vw, -0.0625rem);
+}

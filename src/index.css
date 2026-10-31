@@ -258,6 +258,12 @@ html.lenis body {
     --btn-pad-x: 0.9375rem; /* --space-figma-15 */
   }
 
+  .btn--md {
+    --btn-height: 3.125rem;
+    --btn-font-size: 1.25rem;
+    --btn-pad-x: 1.25rem; /* --space-figma-20 */
+  }
+
   .btn--lg {
     --btn-height: 3.75rem;
     --btn-font-size: 1.5rem;

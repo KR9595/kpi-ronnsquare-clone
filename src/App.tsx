@@ -5,6 +5,8 @@ import Hero from '@/components/sections/Hero/Hero'
 import Preoccupations from '@/components/sections/Preoccupations/Preoccupations'
 import Quote from '@/components/sections/Quote/Quote'
 import RunningLine from '@/components/sections/RunningLine/RunningLine'
+import Services from '@/components/sections/Services/Services'
+import Theses from '@/components/sections/Theses/Theses'
 
 function App() {
   return (
@@ -17,6 +19,8 @@ function App() {
         <Quote />
         <Preoccupations />
         <Advantages />
+        <Theses />
+        <Services />
         {/* Further sections are added incrementally, one at a time. */}
       </main>
       {/* After the content, so the blocks have registered their entrance timelines. */}
