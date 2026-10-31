@@ -1,6 +1,7 @@
 import HomeEntrance from '@/components/intro/HomeEntrance'
 import Header from '@/components/layout/Header/Header'
 import Advantages from '@/components/sections/Advantages/Advantages'
+import CardReviews from '@/components/sections/CardReviews/CardReviews'
 import Hero from '@/components/sections/Hero/Hero'
 import Preoccupations from '@/components/sections/Preoccupations/Preoccupations'
 import Projects from '@/components/sections/Projects/Projects'
@@ -26,6 +27,7 @@ function App() {
           <Theses />
           <Services />
           <Projects />
+          <CardReviews />
           {/* Further sections are added incrementally, one at a time. */}
         </main>
       </div>

@@ -66,6 +66,8 @@ public/
       parallax, flipping totem with its tipping exit; checked at 1440×900, 1024×768 and 375×812)
 - [x] "Our Projects" grid (image slideshows: hover zones and bars from 768px, autoplay,
       swipe and tap below; entrances; checked at 1440×900, 1024×768 and 375×812)
+- [x] "Client Testimonials" slider (crossfading quote + image, arrows, dots, arrow keys,
+      autoplay, swipe below 992px; entrance; checked at 1440×900, 1024×768 and 375×812)
 - [ ] Remaining homepage sections
 - [ ] Footer
 
@@ -128,6 +130,12 @@ public/
   below 768px the images advance every 3s while the card is on screen, a swipe goes to the
   next/previous image, a tap advances and a double tap "clicks" Discover (Draggable on a
   detached proxy, as on the source). The bars jump to their image at every size.
+- "Client Testimonials" (`src/components/sections/CardReviews/`) ports
+  block-1-9-card-reviews-anim.js: at `top 75%` the title's lines slide up, then the subtitle,
+  the slider and the mobile controls fade up. The slider (`src/lib/cardReviewsSlider.ts`)
+  crossfades the quote and its image (0.35s out, the next one in 0.2s later); the arrows,
+  dots, ←/→ and, below 992px, a swipe on the slider change testimonial. It advances every 6s
+  while on screen and pauses for 5s after any manual change.
 - Homepage intro: a port of the source's entrance (`src/lib/intro/`, mirroring its
   `entrances/home.js`, `brand-clone.js`, `wordmark-reveal.js` and `preloader-data.js`; markup
   in `src/components/intro/` plus the static `#site-loader` and session gate in `index.html`).
