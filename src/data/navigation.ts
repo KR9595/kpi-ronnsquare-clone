@@ -58,3 +58,54 @@ export const announcement = {
   text: 'ADP Group becomes Ronnsquare!',
   cta: { label: 'Discover', path: '/en/adn-equipe/' },
 }
+
+export interface FooterNavColumn {
+  title: string
+  links: NavLink[]
+}
+
+/** Footer link columns, copied from the source site's English footer. */
+export const footerNav: FooterNavColumn[] = [
+  {
+    title: 'Expertise',
+    links: [
+      { label: 'Strategic Consulting', path: '/en/expertises/consulting-strategy/' },
+      { label: 'Architecture & Design', path: '/en/expertises/architecture-design/' },
+      { label: 'Technical Delivery', path: '/en/expertises/technical-execution/' },
+      { label: 'Sustainability & Environment', path: '/en/expertises/sustainability-ecology/' },
+      { label: 'See all the expertise', path: '/en/expertises/' },
+    ],
+  },
+  {
+    title: 'Concerns',
+    links: [
+      { label: 'Lease Expiry', path: '/en/preoccupations/lease-expiry/' },
+      { label: 'Bringing Teams Back to the Office', path: '/en/preoccupations/bring-teams-back/' },
+      {
+        label: 'Attracting and Retaining Talent',
+        path: '/en/preoccupations/attract-and-retain-talent/',
+      },
+      { label: 'Complex Projects', path: '/en/preoccupations/complex-projects/' },
+      { label: 'See all concerns', path: '/en/preoccupations/' },
+    ],
+  },
+  {
+    title: 'Projects',
+    links: [
+      { label: 'Niterra', path: '/en/realisations/niterra/' },
+      { label: 'Merz Aesthetics', path: '/en/realisations/merz-aesthetic/' },
+      { label: 'Rödl & Partner', path: '/en/realisations/rodl-partner/' },
+      { label: 'Abylsen', path: '/en/realisations/abylsen/' },
+      { label: 'See all Projects', path: '/en/realisations/' },
+    ],
+  },
+  {
+    title: 'Company',
+    links: [
+      { label: 'DNA & Team', path: '/en/adn-equipe/' },
+      { label: 'Reviews', path: '/en/temoignages/' },
+      { label: 'FAQ', path: '/en/faq/' },
+      { label: 'Contact Us', path: '/en/contact/' },
+    ],
+  },
+]

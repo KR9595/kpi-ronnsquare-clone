@@ -30,7 +30,7 @@ pnpm dev
 src/
   components/
     ui/        # Reusable primitives (Button, Logo, ChevronIcon, SplitChars)
-    layout/    # Page chrome (Header, and later Footer)
+    layout/    # Page chrome (Header, Footer with its legal modals and newsletter toast)
     sections/  # Homepage blocks (Hero, …), each with its ported CSS
     intro/     # Homepage intro markup (brand clone) and its CSS
   data/        # Static content (nav links, etc.)
@@ -71,7 +71,8 @@ public/
 - [x] "Do you have a workplace design project?" call to action (parallax photo, card
       entrance) and FAQ accordion (one answer open at a time, looping illustration); checked
       at 1440×900, 1024×768 and 375×812
-- [ ] Footer
+- [x] Footer (map, link columns, newsletter signup with validation and success toast,
+      Legal Notice / Privacy Policy modals); checked at 1440×900, 1024×768 and 375×812
 
 ## Notes
 
@@ -148,6 +149,17 @@ public/
   answer so toggling never moves the page. The illustration's loop (`src/lib/faqLoop.ts`,
   from faq-loop.js: After Effects keyframes with their cubic-bezier eases) plays only while
   the block is on screen.
+- Footer (`src/components/layout/Footer/`) ports `footer.footer-ronn` and the popups the
+  source renders after it. It sits after the page wrapper, as on the source, and has no
+  scroll animation (the source's logo Lottie sits in a `display: none` box its observer never
+  sees, so it never loads; the static logo is what shows). "Legal Notice" / "Privacy
+  Policy" open the source's modals (`src/lib/legalModal.ts`: 0.3s fade, Lenis stopped while
+  open, Escape/backdrop/× close, a contents sidebar that follows the scroll; `?modal=legal`
+  or `?modal=privacy` opens one on load); their text is stored in `src/data/legal.ts`
+  instead of fetched. The newsletter forms (`src/lib/newsletterForm.ts`) validate like the
+  source (messages on blur/submit, the consent checkbox appears once the email is valid) but
+  **send nothing**: a valid submit only shows the "Thank you for subscribing!" toast
+  (`src/lib/successPopup.ts`, 4s progress bar; above the form on phones) and resets the form.
 - Homepage intro: a port of the source's entrance (`src/lib/intro/`, mirroring its
   `entrances/home.js`, `brand-clone.js`, `wordmark-reveal.js` and `preloader-data.js`; markup
   in `src/components/intro/` plus the static `#site-loader` and session gate in `index.html`).

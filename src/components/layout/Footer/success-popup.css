@@ -1,0 +1,205 @@
+/*
+ * Success popup, toast variant (the newsletter's "Thank you for subscribing!"), ported from
+ * the source site's `.success-popup` / `.success-popup--toast`. Source tokens are resolved
+ * inline and named in comments.
+ */
+
+.success-popup {
+  opacity: 0;
+  transition: opacity 0.25s ease; /* --transition-base */
+}
+
+.success-popup[hidden] {
+  display: none;
+}
+
+.success-popup.is-open {
+  opacity: 1;
+}
+
+.success-popup__card {
+  position: relative;
+  background: #ffead4; /* --color-brand-sable */
+  box-shadow: 0 0.194rem 0.775rem #0000000f; /* --shadow-card */
+  overflow: hidden;
+}
+
+.success-popup__close {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  border: 1px solid #231800; /* --color-brand-maron */
+  border-radius: 62.4375rem; /* --radius-full */
+  background: transparent;
+  color: #231800; /* --color-brand-maron */
+  cursor: pointer;
+  /* --transition-fast */
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.success-popup__close svg {
+  width: 0.6875rem;
+  height: 0.6875rem;
+}
+
+.success-popup__close:hover {
+  background: #231800; /* --color-brand-maron */
+  color: #ffead4; /* --color-brand-sable */
+}
+
+.success-popup__close:focus-visible {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 2px;
+}
+
+.success-popup__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  background: #dbb6fc; /* --color-brand-parme */
+  color: #231800; /* --color-brand-maron */
+  border-radius: 62.4375rem; /* --radius-full */
+}
+
+.success-popup__icon svg {
+  display: block;
+  width: 55%;
+  height: 55%;
+}
+
+.success-popup__text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.success-popup__title {
+  margin: 0;
+  font-family: var(--font-primary);
+  font-weight: 700; /* --font-weight-bold */
+  text-transform: uppercase;
+  color: #231800; /* --color-headline-maron */
+  line-height: 1.1;
+}
+
+.success-popup__body {
+  margin: 0;
+  font-family: var(--font-secondary);
+  font-weight: 400; /* --font-weight-regular */
+  font-size: 1rem; /* --font-size-base */
+  color: #231800cc; /* --color-text-maron */
+  line-height: 1.35;
+}
+
+.success-popup__progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 0.25rem;
+  overflow: hidden;
+  background: #2318001f;
+}
+
+.success-popup__progress::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: #dbb6fc; /* --color-brand-parme */
+  transform: scaleX(1);
+  transform-origin: left center;
+}
+
+.success-popup.is-open .success-popup__progress::after {
+  animation: success-popup-progress var(--sp-duration, 4s) linear forwards;
+}
+
+.success-popup--toast {
+  position: fixed;
+  left: 50%;
+  bottom: 1.5rem;
+  z-index: 500;
+  width: min(32.5rem, 100vw - 2rem);
+  transform: translate(-50%);
+}
+
+.success-popup--toast.is-anchored {
+  bottom: auto;
+}
+
+.success-popup--toast .success-popup__card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.125rem 3rem 1.125rem 1.125rem;
+  border-radius: 1rem; /* --radius-xl */
+  transform: translateY(0.75rem);
+  transition: transform 0.25s ease; /* --transition-base */
+}
+
+.success-popup--toast.is-open .success-popup__card {
+  transform: translateY(0);
+}
+
+.success-popup--toast .success-popup__icon {
+  width: 2.75rem;
+  height: 2.75rem;
+}
+
+.success-popup--toast .success-popup__title {
+  font-size: 1.25rem; /* --font-size-lg */
+}
+
+@media (max-width: 29.9375em) {
+  .success-popup--toast {
+    bottom: 1rem;
+  }
+
+  .success-popup--toast .success-popup__card {
+    gap: 0.75rem;
+    padding: 0.875rem 2.625rem 0.875rem 0.875rem;
+  }
+
+  .success-popup--toast .success-popup__icon {
+    width: 2.375rem;
+    height: 2.375rem;
+  }
+
+  .success-popup--toast .success-popup__title {
+    font-size: 1rem; /* --font-size-base */
+  }
+
+  .success-popup--toast .success-popup__body {
+    font-size: 0.8125rem;
+  }
+}
+
+@keyframes success-popup-progress {
+  from {
+    transform: scaleX(1);
+  }
+
+  to {
+    transform: scaleX(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .success-popup__card {
+    transform: none !important;
+  }
+
+  .success-popup.is-open .success-popup__progress::after {
+    animation: none;
+    transform: scaleX(0);
+  }
+}

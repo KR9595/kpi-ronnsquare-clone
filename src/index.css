@@ -129,9 +129,8 @@ html.lenis body {
   overscroll-behavior: contain;
 }
 
-.lenis.lenis-stopped {
-  overflow: clip;
-}
+/* No `.lenis-stopped { overflow: clip }`: the source leaves it out, so the scrollbar stays
+   (and the page doesn't shift) while a modal has stopped Lenis; Lenis still eats the wheel. */
 
 /* Blocks start hidden and their entrance timelines reveal them (see src/lib/effects.ts). */
 .anim-hidden {

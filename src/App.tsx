@@ -1,4 +1,7 @@
 import HomeEntrance from '@/components/intro/HomeEntrance'
+import Footer from '@/components/layout/Footer/Footer'
+import LegalModal from '@/components/layout/Footer/LegalModal'
+import NewsletterToast from '@/components/layout/Footer/NewsletterToast'
 import Header from '@/components/layout/Header/Header'
 import Advantages from '@/components/sections/Advantages/Advantages'
 import CardReviews from '@/components/sections/CardReviews/CardReviews'
@@ -32,9 +35,13 @@ function App() {
           <CardReviews />
           <Cta />
           <Faq />
-          {/* Further sections are added incrementally, one at a time. */}
         </main>
       </div>
+      {/* As on the source, the footer and its popups sit after the page wrapper. */}
+      <Footer />
+      <LegalModal doc="legal" />
+      <LegalModal doc="privacy" />
+      <NewsletterToast />
       {/* After the content, so the blocks have registered their entrance timelines. */}
       <HomeEntrance />
     </>
