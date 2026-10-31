@@ -39,7 +39,7 @@ src/
     intro/     # Homepage entrance timeline builders (loader, wordmark, brand clone, header)
 public/
   fonts/       # Original N27 + Gambetta woff2 files
-  images/      # Original photos (hero srcset)
+  images/      # Original photos (hero and project srcsets)
   svg/         # Original SVG assets (logo)
 ```
 
@@ -54,6 +54,8 @@ public/
 - [x] Homepage entrance (wordmark preloader, brand clone to hero + scroll shrink into the
       header, mobile settle, repeat-visit quick entrance; checked against the source's
       timeline at 1440×900, 1024×768 and 375×812)
+- [x] "Our Latest Projects" running line (draggable endless ticker with inertia snapping,
+      prev/next arrows, hover pause, entrance; checked at 1440×900, 1024×768 and 375×812)
 - [ ] Remaining homepage sections
 - [ ] Footer
 
@@ -73,6 +75,9 @@ public/
   SplitType (pinned 0.3.4), as on the source. Above-fold blocks (`data-entrance="above-fold"`)
   register a paused timeline via `src/lib/entrance.ts`; the homepage intro plays it at its
   `content` label.
+- The "Our Latest Projects" ticker uses GSAP's `horizontalLoop` helper (`src/lib/horizontalLoop.ts`,
+  ported from the source's `horizontal-loop.js`) with Draggable + InertiaPlugin, registered in
+  `src/lib/gsap.ts`.
 - Homepage intro: a port of the source's entrance (`src/lib/intro/`, mirroring its
   `entrances/home.js`, `brand-clone.js`, `wordmark-reveal.js` and `preloader-data.js`; markup
   in `src/components/intro/` plus the static `#site-loader` and session gate in `index.html`).
